@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     //Code for movement
     private Rigidbody2D rigidbody;
     private Vector3 currentPosition; //Position of the player
+    public float speed;
     
     // Start is called before the first frame update
     void Start()
@@ -41,7 +42,7 @@ public class Player : MonoBehaviour
             moveAmount = new Vector3(0, -1, 0);
         }
 
-        moveAmount = moveAmount.normalized;
+        moveAmount = moveAmount.normalized * Time.deltaTime * speed;
         rigidbody.MovePosition(currentPosition + moveAmount);
 
     }
