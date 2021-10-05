@@ -5,16 +5,21 @@ using UnityEngine;
 public class Child : MonoBehaviour
 {
     private Rigidbody2D rigidBody;
+    private BoxCollider2D collider;
     private Vector3 currentPosition;
     private Vector3 moveAmount;
+    private bool scared;
+    public Player player;
     public int timer;
     public int hp;
     public int speed;
     // Start is called before the first frame update
     void Start()
     {
+        scared = false;
         timer = 0;
         rigidBody = GetComponent<Rigidbody2D>();
+        collider = GetComponent<BoxCollider2D>();
         moveAmount = Vector3.zero;
     }
 
@@ -23,11 +28,34 @@ public class Child : MonoBehaviour
     {
         currentPosition = transform.position;
 
+        //I will need to know how projectiles are done to make this work
+        /*
+        for(int i = 0; i < projectiles.count; i++)
+        {
+            CheckForDamage(projectiles[i]);
+        }
+        */
+
+        //moving directly away from the player
+        if(scared == true)
+        {
+            moveAmount = new Vector3(-player.transform.position.x + currentPosition.x, 
+                                     -player.transform.position.y + currentPosition.y, 0);
+        }
+        
+        //moving towards the player
+        else if(Vector3.Distance(player.transform.position, currentPosition) < 5)
+        {
+            moveAmount = new Vector3(player.transform.position.x - currentPosition.x, 
+                                     player.transform.position.y - currentPosition.y, 0);
+        }
+
         //randomized wandering
-        if(timer == 0)
+        else if (timer == 0)
         {
             moveAmount = new Vector3(Random.Range(-1, 2), Random.Range(-1, 2), 0);
         }
+
 
         timer++;
 
@@ -42,6 +70,7 @@ public class Child : MonoBehaviour
         rigidBody.MovePosition(currentPosition + moveAmount);
 
         //need to check for boundaries of the world and adjust position
+        //checkForCollisions
     }
 
     /// <summary>
@@ -50,5 +79,14 @@ public class Child : MonoBehaviour
     void checkForCollisions()
     {
 
+    }
+
+    void CheckForDamage(Collider2D attack)
+    {
+        if (collider.IsTouching(attack))
+        {
+            hp -= 10;
+            scared = true;
+        }
     }
 }
