@@ -9,7 +9,9 @@ public class Child : MonoBehaviour
     private Vector3 currentPosition;
     private Vector3 moveAmount;
     private bool scared;
+    private int scareDuration;
     public Player player;
+    
     public int timer;
     public int hp;
     public int speed;
@@ -36,6 +38,13 @@ public class Child : MonoBehaviour
         }
         */
 
+        //if the child has been scared for 5 seconds, it is no longer scared
+        if(scareDuration > 300)
+        {
+            scared = false;
+            scareDuration = 0;
+        }
+
         //moving directly away from the player
         if(scared == true)
         {
@@ -56,9 +65,9 @@ public class Child : MonoBehaviour
             moveAmount = new Vector3(Random.Range(-1, 2), Random.Range(-1, 2), 0);
         }
 
-
+        //updating timers
         timer++;
-
+        scareDuration++;
         //if two seconds have passed - change directions
         if(timer > 120)
         {
@@ -87,6 +96,7 @@ public class Child : MonoBehaviour
         {
             hp -= 10;
             scared = true;
+            scareDuration = 0;
         }
     }
 }
