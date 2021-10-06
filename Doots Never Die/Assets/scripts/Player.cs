@@ -24,26 +24,30 @@ public class Player : MonoBehaviour
         //Movement
         if(Input.GetKey(KeyCode.A))
         {
-            moveAmount = new Vector3(-1, 0, 0);
+            moveAmount.x -= 1;
         }
 
         if (Input.GetKey(KeyCode.D))
         {
-            moveAmount = new Vector3(1, 0, 0);
+            moveAmount.x += 1;
         }
 
         if (Input.GetKey(KeyCode.W))
         {
-            moveAmount = new Vector3(0, 1, 0);
+            moveAmount.y += 1;
         }
         
         if (Input.GetKey(KeyCode.S))
         {
-            moveAmount = new Vector3(0, -1, 0);
+            moveAmount.y -= 1;
         }
 
         moveAmount = moveAmount.normalized * Time.deltaTime * speed;
         rigidbody.MovePosition(currentPosition + moveAmount);
-
+        Vector3 newScale = transform.localScale;
+        if (moveAmount.x > 0 && newScale.x < 0 || moveAmount.x < 0 && newScale.x > 0) {
+            newScale.x *= -1;
+        }
+        transform.localScale = newScale;
     }
 }
