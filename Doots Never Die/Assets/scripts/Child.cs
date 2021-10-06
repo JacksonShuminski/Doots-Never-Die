@@ -84,43 +84,7 @@ public class Child : MonoBehaviour
         //updating where the object is located
         currentPosition = transform.position;
 
-        //need to check for boundaries of the world and adjust position
-        bool collisionCheck = checkForCollisions();
-
-        if (collisionCheck)
-        {
-            rigidBody.MovePosition(currentPosition);
-        }
     }
-
-    /// <summary>
-    /// will need to know some info to finish up this one - how are we handling scares?
-    /// </summary>
-    bool checkForCollisions()
-    {
-        if(currentPosition.x > 400)
-        {
-            currentPosition.x = previousPosition.x;
-            return true;
-        }
-        if(currentPosition.x < -400)
-        {
-            currentPosition.x = previousPosition.x;
-            return true;
-        }
-        if(currentPosition.y > 400)
-        {
-            currentPosition.y = previousPosition.y;
-            return true;
-        }
-        if(currentPosition.y < -400)
-        {
-            currentPosition.y = previousPosition.y;
-            return true;
-        }
-        return false;
-    }
-
 
     void CheckForDamage(Collider2D attack)
     {

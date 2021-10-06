@@ -3,6 +3,7 @@ Shader "Custom/NewImageEffectShader"
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
+        _ScreenBulge("Screen Bulge", Range(0.0, 1.0)) = 0.5
     }
     SubShader
     {
@@ -38,6 +39,7 @@ Shader "Custom/NewImageEffectShader"
             }
 
             sampler2D _MainTex;
+            float _ScreenBulge;
 
             fixed4 frag (v2f i) : SV_Target
             {
@@ -48,7 +50,7 @@ Shader "Custom/NewImageEffectShader"
                 float2 disp_uv = i.uv + float2(0, sin(i.vertex.x / 10 + _Time[1] * 5) / 600);
 
                 // bulging glass
-                float tv_factor = 0.5;
+                float tv_factor = _ScreenBulge;
                 float2 disp_uv_from_center = disp_uv - float2(0.5, 0.5);
                 float dist_from_center = sqrt(pow(disp_uv_from_center.x, 2) + pow(disp_uv_from_center.y, 2));
                 
