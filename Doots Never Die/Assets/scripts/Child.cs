@@ -7,6 +7,7 @@ public class Child : MonoBehaviour
     private Rigidbody2D rigidBody;
     private BoxCollider2D collider;
     private Vector3 currentPosition;
+    private Vector3 previousPosition;
     private Vector3 moveAmount;
     private bool scared;
     private int scareDuration;
@@ -28,7 +29,6 @@ public class Child : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        currentPosition = transform.position;
 
         //I will need to know how projectiles are done to make this work
         /*
@@ -74,21 +74,53 @@ public class Child : MonoBehaviour
             timer = 0;
         }
 
+        //where the object was last frame
+        previousPosition = currentPosition;
+
         //actually moving the object
         moveAmount = moveAmount.normalized * Time.deltaTime * speed;
         rigidBody.MovePosition(currentPosition + moveAmount);
 
+        //updating where the object is located
+        currentPosition = transform.position;
+
         //need to check for boundaries of the world and adjust position
-        //checkForCollisions
+        bool collisionCheck = checkForCollisions();
+
+        if (collisionCheck)
+        {
+            rigidBody.MovePosition(currentPosition);
+        }
     }
 
     /// <summary>
     /// will need to know some info to finish up this one - how are we handling scares?
     /// </summary>
-    void checkForCollisions()
+    bool checkForCollisions()
     {
-
+        if(currentPosition.x > 400)
+        {
+            currentPosition.x = previousPosition.x;
+            return true;
+        }
+        if(currentPosition.x < -400)
+        {
+            currentPosition.x = previousPosition.x;
+            return true;
+        }
+        if(currentPosition.y > 400)
+        {
+            currentPosition.y = previousPosition.y;
+            return true;
+        }
+        if(currentPosition.y < -400)
+        {
+            currentPosition.y = previousPosition.y;
+            return true;
+        }
+        return false;
     }
+
 
     void CheckForDamage(Collider2D attack)
     {
