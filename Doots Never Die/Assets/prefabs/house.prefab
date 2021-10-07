@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4162983685093261353}
   - component: {fileID: 4162983685093261352}
   - component: {fileID: 2479160600193477568}
+  - component: {fileID: 1839770919083598253}
   m_Layer: 0
   m_Name: house
   m_TagString: Untagged
@@ -136,3 +137,31 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.81602776, y: 0.1799339}
   m_EdgeRadius: 0
+--- !u!68 &1839770919083598253
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4162983685093261355}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: 0.096585885, y: 0.31513137}
+  - {x: -0.55068547, y: 0.31072864}
+  - {x: -0.5504314, y: 0.3490665}
+  - {x: -0.3982151, y: 0.49871}
+  - {x: 0.41906777, y: 0.4990327}
+  - {x: 0.5605007, y: 0.3563306}
+  - {x: 0.55872804, y: 0.31004745}
+  - {x: 0.13094741, y: 0.3162056}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0
