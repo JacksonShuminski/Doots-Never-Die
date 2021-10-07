@@ -8,18 +8,40 @@ public class Aim : MonoBehaviour
 
     private void Awake()
     {
-        aimTransform = transform.Find("Aim");   
+        aimTransform = transform.Find("Aim");
     }
 
     // Update is called once per frame
     void Update()
     {
+        PlayerAim();
+        PlayerShoot();
+    }
+
+    private void PlayerAim()
+    {
         Vector3 mousePosition = GetMousePosition();
 
-        Vector3 aimDirection = (mousePosition - transform.position).normalized;
-        float angle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
+        if(transform.localScale.x > 0)
+        {
+            Vector3 aimDirection = (mousePosition - transform.position).normalized;
+            float angle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
+            aimTransform.eulerAngles = new Vector3(0, 0, angle);
+        }
+        else
+        {
+            Vector3 aimDirection = (mousePosition - aimTransform.position).normalized;
+            float angle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
+            aimTransform.eulerAngles = new Vector3(0, 0, angle - 180);
+        }
+    }
 
-        aimTransform.eulerAngles = new Vector3(0, 0, angle);
+    private void PlayerShoot()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+
+        }
     }
 
     public static Vector3 GetMousePosition()
