@@ -59,6 +59,7 @@ public class Aim : MonoBehaviour
             Vector3 mousePosition = GetMousePosition();
 
             GameObject shot = Instantiate(dootpf, bugleEndTransform.transform.position, Quaternion.identity);
+            shot.transform.up = bugleEndTransform.transform.right;
 
             projectileList.Add(shot);
         }
@@ -70,6 +71,7 @@ public class Aim : MonoBehaviour
         vec.z = 0f;
         return vec;
     }
+
     public static Vector3 GetMousePositionWithZ(Camera worldCamera)
     {
         return GetMousePositionWithZ(Input.mousePosition, worldCamera);
