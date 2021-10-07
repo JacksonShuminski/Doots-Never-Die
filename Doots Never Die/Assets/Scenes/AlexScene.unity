@@ -141,6 +141,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4538909378006934475, guid: 655151c4b56f3674395645aa7e9e2e1e, type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 6676010928057867294, guid: 655151c4b56f3674395645aa7e9e2e1e, type: 3}
       propertyPath: m_Name
       value: Skeleton
@@ -188,6 +192,10 @@ PrefabInstance:
     - target: {fileID: 7419948752063670444, guid: 655151c4b56f3674395645aa7e9e2e1e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7513858988542625885, guid: 655151c4b56f3674395645aa7e9e2e1e, type: 3}
+      propertyPath: speed
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 655151c4b56f3674395645aa7e9e2e1e, type: 3}
@@ -333,5 +341,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Child
       objectReference: {fileID: 0}
+    - target: {fileID: 8028911473695287346, guid: 319bd0c7d6aaa7b4bb2cfeba9e411065, type: 3}
+      propertyPath: speed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8028911473695287346, guid: 319bd0c7d6aaa7b4bb2cfeba9e411065, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1397612881}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 319bd0c7d6aaa7b4bb2cfeba9e411065, type: 3}

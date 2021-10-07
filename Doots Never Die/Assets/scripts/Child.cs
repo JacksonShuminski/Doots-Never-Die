@@ -12,8 +12,8 @@ public class Child : MonoBehaviour
     private bool scared;
     private int scareDuration;
     public Player player;
-    
-    public int timer;
+    private int timer;
+
     public int hp;
     public int speed;
     // Start is called before the first frame update
@@ -21,6 +21,7 @@ public class Child : MonoBehaviour
     {
         scared = false;
         timer = 0;
+        hp = 40;
         rigidBody = GetComponent<Rigidbody2D>();
         collider = GetComponent<BoxCollider2D>();
         moveAmount = Vector3.zero;
@@ -38,28 +39,37 @@ public class Child : MonoBehaviour
         }
         */
 
-        //if the child has been scared for 5 seconds, it is no longer scared
+        //if the child is too scared, they leave the game
+        if(hp <= 0)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        //if the child has been scared for 5 seconds, it is no longer scared. A projectile resets this counter
+        //also, the counter will reset on its own in 5 seconds so that the int doesn't increase
+        //to infinity and cause memory issues
         if(scareDuration > 300)
         {
             scared = false;
             scareDuration = 0;
         }
 
-        //moving directly away from the player
+        //moving directly away from the player if scared
         if(scared == true)
         {
             moveAmount = new Vector3(-player.transform.position.x + currentPosition.x, 
                                      -player.transform.position.y + currentPosition.y, 0);
         }
         
-        //moving towards the player
+        //moving towards the player if they get close
         else if(Vector3.Distance(player.transform.position, currentPosition) < 5)
         {
             moveAmount = new Vector3(player.transform.position.x - currentPosition.x, 
                                      player.transform.position.y - currentPosition.y, 0);
         }
 
-        //randomized wandering
+        //randomized wandering otherwise
         else if (timer == 0)
         {
             moveAmount = new Vector3(Random.Range(-1, 2), Random.Range(-1, 2), 0);
@@ -68,6 +78,7 @@ public class Child : MonoBehaviour
         //updating timers
         timer++;
         scareDuration++;
+
         //if two seconds have passed - change directions
         if(timer > 120)
         {
