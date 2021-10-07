@@ -1,14 +1,25 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Aim : MonoBehaviour
 {
+    public event EventHandler<OnShootEventArgs> OnShoot;
+    public class OnShootEventArgs : EventArgs
+    {
+        public Vector3 bugleEndPointPosition;
+        public Vector3 shootPosition;
+    }
+
+    //Getting position data for GameObject
     private Transform aimTransform;
+    private Transform bugleEndTransform;
 
     private void Awake()
     {
         aimTransform = transform.Find("Aim");
+        bugleEndTransform = transform.Find("BugleEndPosition");
     }
 
     // Update is called once per frame
@@ -22,16 +33,16 @@ public class Aim : MonoBehaviour
     {
         Vector3 mousePosition = GetMousePosition();
 
-        if(transform.localScale.x > 0)
+        Vector3 aimDirection = (mousePosition - aimTransform.position).normalized;
+        float angle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
+
+        //Checking to see which way the player is facing and rotating bugle accordingly
+        if (transform.localScale.x > 0)
         {
-            Vector3 aimDirection = (mousePosition - transform.position).normalized;
-            float angle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
             aimTransform.eulerAngles = new Vector3(0, 0, angle);
         }
         else
         {
-            Vector3 aimDirection = (mousePosition - aimTransform.position).normalized;
-            float angle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
             aimTransform.eulerAngles = new Vector3(0, 0, angle - 180);
         }
     }
@@ -40,7 +51,13 @@ public class Aim : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
+            Vector3 mousePosition = GetMousePosition();
 
+            OnShoot.Invoke(this, new OnShootEventArgs
+            {
+                bugleEndPointPosition = bugleEndTransform.position,
+                shootPosition = mousePosition,
+            }) ;
         }
     }
 
