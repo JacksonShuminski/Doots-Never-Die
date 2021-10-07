@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Child : MonoBehaviour
 {
+    // Test Comment
     private Rigidbody2D rigidBody;
     private BoxCollider2D collider;
     private Vector3 currentPosition;
