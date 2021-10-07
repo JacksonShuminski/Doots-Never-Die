@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class Aim : MonoBehaviour
 {
-    [SerializeField] private Projectile dootpf;
+    [SerializeField] private GameObject dootpf;
+    public List<GameObject> projectileList;
 
     /*
     public event EventHandler<OnShootEventArgs> OnShoot;
@@ -17,13 +18,13 @@ public class Aim : MonoBehaviour
     */
 
     //Getting position data for GameObject
-    private Transform aimTransform;
-    private Transform bugleEndTransform;
+    private GameObject aimTransform;
+    private GameObject bugleEndTransform;
 
     private void Awake()
     {
-        aimTransform = transform.Find("Aim");
-        bugleEndTransform = transform.Find("BugleEndPosition");
+        aimTransform = GameObject.Find("Aim");
+        bugleEndTransform = GameObject.Find("BugleEndPosition");
     }
 
     // Update is called once per frame
@@ -37,17 +38,17 @@ public class Aim : MonoBehaviour
     {
         Vector3 mousePosition = GetMousePosition();
 
-        Vector3 aimDirection = (mousePosition - aimTransform.position).normalized;
+        Vector3 aimDirection = (mousePosition - aimTransform.transform.position).normalized;
         float angle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
 
         //Checking to see which way the player is facing and rotating bugle accordingly
         if (transform.localScale.x > 0)
         {
-            aimTransform.eulerAngles = new Vector3(0, 0, angle);
+            aimTransform.transform.eulerAngles = new Vector3(0, 0, angle);
         }
         else
         {
-            aimTransform.eulerAngles = new Vector3(0, 0, angle - 180);
+            aimTransform.transform.eulerAngles = new Vector3(0, 0, angle - 180);
         }
     }
 
@@ -57,14 +58,9 @@ public class Aim : MonoBehaviour
         {
             Vector3 mousePosition = GetMousePosition();
 
-            Instantiate(dootpf, bugleEndTransform.position, Quaternion.identity);
-            /*
-            OnShoot.Invoke(this, new OnShootEventArgs
-            {
-                bugleEndPointPosition = bugleEndTransform.position,
-                shootPosition = mousePosition,
-            }) ;
-            */
+            GameObject shot = Instantiate(dootpf, bugleEndTransform.transform.position, Quaternion.identity);
+
+            projectileList.Add(shot);
         }
     }
 

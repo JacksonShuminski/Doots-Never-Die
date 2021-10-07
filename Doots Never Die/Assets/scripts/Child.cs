@@ -12,6 +12,7 @@ public class Child : MonoBehaviour
     private bool scared;
     private int scareDuration;
     public Player player;
+    public Aim aim;
     private int timer;
 
     public int hp;
@@ -32,12 +33,13 @@ public class Child : MonoBehaviour
     {
 
         //I will need to know how projectiles are done to make this work
-        /*
-        for(int i = 0; i < projectiles.count; i++)
+        if (aim.projectileList.Count > 0)
         {
-            CheckForDamage(projectiles[i]);
+            for (int i = 0; i < aim.projectileList.Count; i++)
+            {
+                CheckForDamage(aim.projectileList[i].GetComponent<BoxCollider2D>());
+            }
         }
-        */
 
         //if the child is too scared, they leave the game
         if(hp <= 0)
@@ -101,6 +103,8 @@ public class Child : MonoBehaviour
     {
         if (collider.IsTouching(attack))
         {
+            aim.projectileList.Remove(attack.gameObject);
+            Destroy(attack.gameObject);
             hp -= 10;
             scared = true;
             scareDuration = 0;

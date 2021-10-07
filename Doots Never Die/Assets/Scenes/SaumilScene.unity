@@ -253,12 +253,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cda2004b87cf2be40ab414c16e3ca89e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dootpf: {fileID: -1368429594877796404, guid: c147044227ea3dd49987b0695bbdbd4e, type: 3}
+  dootpf: {fileID: 4102059553130538830, guid: c147044227ea3dd49987b0695bbdbd4e, type: 3}
+  projectileList: []
 --- !u!4 &266310350 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7419948752063670444, guid: 655151c4b56f3674395645aa7e9e2e1e, type: 3}
   m_PrefabInstance: {fileID: 1866852531}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &266310351 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7513858988542625885, guid: 655151c4b56f3674395645aa7e9e2e1e, type: 3}
+  m_PrefabInstance: {fileID: 1866852531}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 266310345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62a03abb992f03947832ab27fda2220d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1087280706
 GameObject:
   m_ObjectHideFlags: 0
@@ -289,6 +301,27 @@ Transform:
   m_Father: {fileID: 181843053}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1194715102 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4840509598637924623, guid: 319bd0c7d6aaa7b4bb2cfeba9e411065, type: 3}
+  m_PrefabInstance: {fileID: 1895791851}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1194715107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1194715102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87ce9da6146998440b3d91709585fb9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 266310351}
+  aim: {fileID: 266310347}
+  hp: 50
+  speed: 10
 --- !u!1 &1509959586
 GameObject:
   m_ObjectHideFlags: 0
