@@ -11,9 +11,9 @@ public class Projectile : MonoBehaviour
 
     void Start()
     {
-        player = GameObject.Find("Skeleton");
+        player = GameObject.Find("DootSkeleton");
         aim = player.GetComponent<Aim>();
-        direction = Input.mousePosition - transform.position;
+        direction =  GetMousePosition().normalized - transform.position.normalized;
         transform.eulerAngles = new Vector3(0, 0, Vector3.Angle(direction, transform.forward));
         timer = 0;
     }
@@ -22,6 +22,7 @@ public class Projectile : MonoBehaviour
     void Update()
     {
         float speed = 5f;
+
         transform.position += direction.normalized * speed * Time.deltaTime;
 
         if(timer > 300)
@@ -32,5 +33,21 @@ public class Projectile : MonoBehaviour
         }
 
         timer++;
+    }
+
+    public static Vector3 GetMousePosition()
+    {
+        Vector3 vec = GetMousePositionWithZ(Input.mousePosition, Camera.main);
+        vec.z = 0f;
+        return vec;
+    }
+    public static Vector3 GetMousePositionWithZ(Camera worldCamera)
+    {
+        return GetMousePositionWithZ(Input.mousePosition, worldCamera);
+    }
+    public static Vector3 GetMousePositionWithZ(Vector3 screenPOsition, Camera worldCamera)
+    {
+        Vector3 worldPosition = worldCamera.ScreenToWorldPoint(screenPOsition);
+        return worldPosition;
     }
 }
