@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Aim : MonoBehaviour
 {
+    // Base Variables
     [SerializeField] private GameObject dootpf;
     public List<GameObject> projectileList;
 
@@ -17,11 +18,12 @@ public class Aim : MonoBehaviour
     }
     */
 
-    //Getting position data for GameObject
+    // Getting position data for GameObject
     private GameObject aimTransform;
     private GameObject bugleEndTransform;
     private bool scaleSwitch = false;
 
+    //-------------------------------------------------------------------------------------------------------------
     private void Awake()
     {
         aimTransform = GameObject.Find("Aim");
@@ -29,12 +31,15 @@ public class Aim : MonoBehaviour
     }
 
     // Update is called once per frame
+    //-------------------------------------------------------------------------------------------------------------
     void Update()
     {
         PlayerAim();
         PlayerShoot();
     }
 
+    // Base aiming method
+    //-------------------------------------------------------------------------------------------------------------
     private void PlayerAim()
     {
         Vector3 mousePosition = GetMousePosition();
@@ -53,6 +58,7 @@ public class Aim : MonoBehaviour
         }
     }
 
+    //-------------------------------------------------------------------------------------------------------------
     private void PlayerShoot()
     {
         if (Input.GetMouseButtonDown(0))
@@ -73,6 +79,7 @@ public class Aim : MonoBehaviour
         }
     }
 
+    //-------------------------------------------------------------------------------------------------------------
     public static Vector3 GetMousePosition()
     {
         Vector3 vec = GetMousePositionWithZ(Input.mousePosition, Camera.main);
@@ -80,10 +87,13 @@ public class Aim : MonoBehaviour
         return vec;
     }
 
+    //-------------------------------------------------------------------------------------------------------------
     public static Vector3 GetMousePositionWithZ(Camera worldCamera)
     {
         return GetMousePositionWithZ(Input.mousePosition, worldCamera);
     }
+
+    //-------------------------------------------------------------------------------------------------------------
     public static Vector3 GetMousePositionWithZ(Vector3 screenPOsition, Camera worldCamera)
     {
         Vector3 worldPosition = worldCamera.ScreenToWorldPoint(screenPOsition);
