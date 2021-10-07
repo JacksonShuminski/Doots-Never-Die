@@ -8,6 +8,7 @@ public class Projectile : MonoBehaviour
     private GameObject player;
     private Aim aim;
     private int timer;
+    public Vector3 skel_vel;
 
     void Start()
     {
@@ -24,8 +25,8 @@ public class Projectile : MonoBehaviour
         float speed = 5f;
 
         transform.position += transform.up * speed * Time.deltaTime;
-
-        if(timer > 300)
+        transform.position += skel_vel * Time.deltaTime/10;
+        if (timer > 500)
         {
             aim.projectileList.Remove(gameObject);
             timer = 0;

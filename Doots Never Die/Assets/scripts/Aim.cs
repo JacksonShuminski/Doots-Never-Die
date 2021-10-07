@@ -59,7 +59,7 @@ public class Aim : MonoBehaviour
         {
 
             GameObject shot = Instantiate(dootpf, bugleEndTransform.transform.position, Quaternion.identity);
-            
+            shot.GetComponent<Projectile>().skel_vel = GetComponent<Player>().moveAmount;
 
             if (transform.localScale.x < 0)
             {

@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     private Rigidbody2D rigidbody;
     private Vector3 currentPosition; //Position of the player
     public float speed;
+    public Vector3 moveAmount = Vector3.zero;
     
     // Start is called before the first frame update
     void Start()
@@ -18,8 +19,8 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        moveAmount = Vector3.zero;
         currentPosition = transform.position;
-        Vector3 moveAmount = Vector3.zero;
 
         //Movement
         if(Input.GetKey(KeyCode.A))
@@ -41,9 +42,8 @@ public class Player : MonoBehaviour
         {
             moveAmount.y -= 1;
         }
-
-        moveAmount = moveAmount.normalized * Time.deltaTime * speed;
-        rigidbody.MovePosition(currentPosition + moveAmount);
+        moveAmount = moveAmount.normalized * speed;
+        rigidbody.MovePosition(currentPosition + moveAmount * Time.deltaTime);
         Vector3 newScale = transform.localScale;
         if (moveAmount.x > 0 && newScale.x < 0 || moveAmount.x < 0 && newScale.x > 0) {
             newScale.x *= -1;
