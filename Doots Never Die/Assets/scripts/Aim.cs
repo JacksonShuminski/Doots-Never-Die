@@ -57,7 +57,6 @@ public class Aim : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Vector3 mousePosition = GetMousePosition();
 
             GameObject shot = Instantiate(dootpf, bugleEndTransform.transform.position, Quaternion.identity);
             
