@@ -278,10 +278,10 @@ MonoBehaviour:
   m_Name: FMODStudioSettings
   m_EditorClassIdentifier: 
   SwitchSettingsMigration: 1
-  HasSourceProject: 0
-  HasPlatforms: 0
-  sourceProjectPath: 
-  sourceBankPath: Assets/Editor Default Resources/FMOD
+  HasSourceProject: 1
+  HasPlatforms: 1
+  sourceProjectPath: ../DootsNeverDieSound/DootsNeverDieSound.fspro
+  sourceBankPath: ../DootsNeverDieSound/Build
   SourceBankPathUnformatted: 
   BankRefreshCooldown: 5
   ShowBankRefreshWindow: 1
