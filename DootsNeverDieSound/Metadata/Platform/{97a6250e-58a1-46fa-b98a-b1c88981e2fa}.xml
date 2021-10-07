@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<objects serializationModel="Studio.02.02.00">
-	<object class="Platform" id="{0c5f8568-074f-4806-a127-e3b7934a6976}">
+<objects serializationModel="Studio.02.01.00">
+	<object class="Platform" id="{97a6250e-58a1-46fa-b98a-b1c88981e2fa}">
 		<property name="hardwareType">
 			<value>0</value>
 		</property>
