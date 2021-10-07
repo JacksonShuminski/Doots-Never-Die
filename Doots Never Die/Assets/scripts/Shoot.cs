@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Shoot : MonoBehaviour
 {
+    /*
     //Prefab for projectile
     [SerializeField] private Transform doot;
 
@@ -19,4 +20,5 @@ public class Shoot : MonoBehaviour
     {
         Instantiate(doot, e.bugleEndPointPosition, Quaternion.identity);
     }
+    */
 }

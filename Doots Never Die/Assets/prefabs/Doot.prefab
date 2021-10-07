@@ -91,6 +91,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4939056596389290014}
+  - component: {fileID: -1368429594877796404}
   m_Layer: 0
   m_Name: Doot
   m_TagString: Untagged
@@ -113,3 +114,15 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-1368429594877796404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4102059553130538830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b2e558a5b3c6b54c9224db05480fc7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

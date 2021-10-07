@@ -241,8 +241,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6065ed1cb150117418f9eec744a16486, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doot: {fileID: 4939056596389290014, guid: c147044227ea3dd49987b0695bbdbd4e, type: 3}
-  aim: {fileID: 266310347}
 --- !u!114 &266310347
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -255,6 +253,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cda2004b87cf2be40ab414c16e3ca89e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dootpf: {fileID: -1368429594877796404, guid: c147044227ea3dd49987b0695bbdbd4e, type: 3}
 --- !u!4 &266310350 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7419948752063670444, guid: 655151c4b56f3674395645aa7e9e2e1e, type: 3}

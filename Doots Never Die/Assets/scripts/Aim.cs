@@ -5,12 +5,16 @@ using UnityEngine;
 
 public class Aim : MonoBehaviour
 {
+    [SerializeField] private Projectile dootpf;
+
+    /*
     public event EventHandler<OnShootEventArgs> OnShoot;
     public class OnShootEventArgs : EventArgs
     {
         public Vector3 bugleEndPointPosition;
         public Vector3 shootPosition;
     }
+    */
 
     //Getting position data for GameObject
     private Transform aimTransform;
@@ -53,11 +57,14 @@ public class Aim : MonoBehaviour
         {
             Vector3 mousePosition = GetMousePosition();
 
+            Instantiate(dootpf, bugleEndTransform.position, Quaternion.identity);
+            /*
             OnShoot.Invoke(this, new OnShootEventArgs
             {
                 bugleEndPointPosition = bugleEndTransform.position,
                 shootPosition = mousePosition,
             }) ;
+            */
         }
     }
 
