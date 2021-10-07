@@ -20,6 +20,7 @@ public class Aim : MonoBehaviour
     //Getting position data for GameObject
     private GameObject aimTransform;
     private GameObject bugleEndTransform;
+    private bool scaleSwitch = false;
 
     private void Awake()
     {
@@ -59,7 +60,15 @@ public class Aim : MonoBehaviour
             Vector3 mousePosition = GetMousePosition();
 
             GameObject shot = Instantiate(dootpf, bugleEndTransform.transform.position, Quaternion.identity);
-            shot.transform.up = bugleEndTransform.transform.right;
+            
+
+            if (transform.localScale.x < 0)
+            {
+                shot.transform.up = bugleEndTransform.transform.right*-1;
+            }else
+            {
+                shot.transform.up = bugleEndTransform.transform.right;
+            }
 
             projectileList.Add(shot);
         }

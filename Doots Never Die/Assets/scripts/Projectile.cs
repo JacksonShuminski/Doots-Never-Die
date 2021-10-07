@@ -16,7 +16,7 @@ public class Projectile : MonoBehaviour
         //direction =  GetMousePosition().normalized - transform.position.normalized;
         //transform.eulerAngles = new Vector3(0, 0, Vector3.Angle(direction, transform.forward));
         //timer = 0;
-        Destroy(gameObject, 30);
+        Destroy(gameObject, 1);
     }
 
     // Update is called once per frame
