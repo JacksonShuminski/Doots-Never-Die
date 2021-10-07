@@ -14,14 +14,11 @@ public class Projectile : MonoBehaviour
     //-------------------------------------------------------------------------------------------------------------
     void Start()
     {
-        /*
         player = GameObject.Find("DootSkeleton");
         aim = player.GetComponent<Aim>();
         direction =  GetMousePosition().normalized - transform.position.normalized;
-        transform.eulerAngles = new Vector3(0, 0, Vector3.Angle(direction, transform.forward));
+        //transform.eulerAngles = new Vector3(0, 0, Vector3.Angle(direction, transform.forward));
         timer = 0;
-        */
-        Destroy(gameObject, 30);
     }
 
     // Update is called once per frame
@@ -30,7 +27,17 @@ public class Projectile : MonoBehaviour
     {
         // Starting Values
         float speed = 5f;
+
         transform.position += transform.up * speed * Time.deltaTime;
+
+        if(timer > 300)
+        {
+            aim.projectileList.Remove(gameObject);
+            timer = 0;
+            Destroy(gameObject);
+        }
+
+        timer++;
     }
 
     // Methods used to adjust projectile direction
