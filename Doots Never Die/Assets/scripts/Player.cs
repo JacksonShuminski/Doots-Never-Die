@@ -4,24 +4,26 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    //Code for movement
-    private Rigidbody2D rigidbody;
+    // Base Variables
+    private Rigidbody2D rigidbody;   // Body for movement
     private Vector3 currentPosition; //Position of the player
     public float speed;
-    
+
     // Start is called before the first frame update
+    //-------------------------------------------------------------------------------------------------------------
     void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
+    //-------------------------------------------------------------------------------------------------------------
     void Update()
     {
         currentPosition = transform.position;
         Vector3 moveAmount = Vector3.zero;
 
-        //Movement
+        // Movement by keyboard inputs that adjust our move value
         if(Input.GetKey(KeyCode.A))
         {
             moveAmount.x -= 1;
@@ -42,6 +44,7 @@ public class Player : MonoBehaviour
             moveAmount.y -= 1;
         }
 
+        // Adjust position based on current position
         moveAmount = moveAmount.normalized * Time.deltaTime * speed;
         rigidbody.MovePosition(currentPosition + moveAmount);
         Vector3 newScale = transform.localScale;

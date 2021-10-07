@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Child : MonoBehaviour
 {
-    // Test Comment
+    // Base Variables
     private Rigidbody2D rigidBody;
     private BoxCollider2D collider;
     private Vector3 currentPosition;
@@ -12,13 +12,16 @@ public class Child : MonoBehaviour
     private Vector3 moveAmount;
     private bool scared;
     private int scareDuration;
-    public Player player;
-    public Aim aim;
     private int timer;
 
+    public Player player;
+    public Aim aim;
     public int hp;
     public int speed;
+
     // Start is called before the first frame update
+    // Setting our base variables to their proper values
+    //-------------------------------------------------------------------------------------------------------------
     void Start()
     {
         scared = false;
@@ -30,6 +33,7 @@ public class Child : MonoBehaviour
     }
 
     // Update is called once per frame
+    //-------------------------------------------------------------------------------------------------------------
     void Update()
     {
 
@@ -100,6 +104,8 @@ public class Child : MonoBehaviour
 
     }
 
+    // Checks if bodies are colliding and removes if true
+    //-------------------------------------------------------------------------------------------------------------
     void CheckForDamage(Collider2D attack)
     {
         if (collider.IsTouching(attack))
