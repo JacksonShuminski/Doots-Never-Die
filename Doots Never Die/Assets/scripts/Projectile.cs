@@ -24,13 +24,13 @@ public class Projectile : MonoBehaviour
 
     // Update is called once per frame
     //-------------------------------------------------------------------------------------------------------------
-    void Update()
+    void FixedUpdate()
     {
         // Starting Values
         float speed = 5f;
 
         transform.position += transform.up * speed * Time.deltaTime;
-        transform.position += skel_vel * Time.deltaTime/10;
+        transform.position += skel_vel * Time.deltaTime;
         if (timer > 500)
         {
             aim.projectileList.Remove(gameObject);

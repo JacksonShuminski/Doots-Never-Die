@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
 
     // Update is called once per frame
     //-------------------------------------------------------------------------------------------------------------
-    void Update()
+    void FixedUpdate()
     {
         moveAmount = Vector3.zero;
         currentPosition = transform.position;

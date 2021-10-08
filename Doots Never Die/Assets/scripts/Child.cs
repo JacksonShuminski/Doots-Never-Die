@@ -34,8 +34,9 @@ public class Child : MonoBehaviour
 
     // Update is called once per frame
     //-------------------------------------------------------------------------------------------------------------
-    void Update()
+    void FixedUpdate()
     {
+        GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 
         //I will need to know how projectiles are done to make this work
         if (aim.projectileList.Count > 0)
