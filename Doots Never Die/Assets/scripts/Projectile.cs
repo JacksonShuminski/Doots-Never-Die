@@ -27,11 +27,11 @@ public class Projectile : MonoBehaviour
     void FixedUpdate()
     {
         // Starting Values
-        float speed = 5f;
+        float speed = 10f;
 
         transform.position += transform.up * speed * Time.deltaTime;
         transform.position += skel_vel * Time.deltaTime;
-        if (timer > 500)
+        if (timer > 300)
         {
             aim.projectileList.Remove(gameObject);
             timer = 0;

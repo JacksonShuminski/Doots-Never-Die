@@ -53,19 +53,21 @@ Shader "Custom/CRTShader"
                 }
                 else
                 {
-                    screen_size = int2(960, 600);
+                    screen_size = int2((int)(i.vertex.x / i.uv.x), (int)(i.vertex.y / (i.uv.y)));
+                    //i.vertex.y = screen_size.y - i.vertex.y;
                 }
 
                 // wiggly lines
-                float2 disp_uv = i.uv + float2(0, sin(i.vertex.x / 10 + _Time[1] * 5) / 600);
+                float2 uv_from_center = i.uv - float2(0.5, 0.5);
+                float dist_from_center = sqrt(pow(uv_from_center.x, 2) + pow(uv_from_center.y, 2));
+                float2 disp = float2(sin(i.vertex.y / 10 + _Time[1] * 5) / 600, sin(i.vertex.x / 10 + _Time[1] * 5) / 600) * dist_from_center * 5;
+                float2 disp_uv = i.uv + disp;
 
                 // bulging glass
                 float tv_factor = _ScreenBulge;
-                float2 disp_uv_from_center = disp_uv - float2(0.5, 0.5);
-                float dist_from_center = sqrt(pow(disp_uv_from_center.x, 2) + pow(disp_uv_from_center.y, 2));
                 
-                disp_uv.x += pow((float)disp_uv_from_center.y, 2) * disp_uv_from_center.x * tv_factor;
-                disp_uv.y += pow((float)disp_uv_from_center.x, 2) * disp_uv_from_center.y * tv_factor;
+                disp_uv.x += pow((float)uv_from_center.y, 2) * uv_from_center.x * tv_factor;
+                disp_uv.y += pow((float)uv_from_center.x, 2) * uv_from_center.y * tv_factor;
 
                 int2 disp_vertex = i.vertex;
                 //disp_vertex.x -= (pow((float)disp_uv_from_center.y, 2) * disp_uv_from_center.x * tv_factor) * screen_size.x;
