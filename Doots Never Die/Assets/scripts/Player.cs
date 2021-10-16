@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     private Vector3 currentPosition; //Position of the player
     public float speed;
     public Vector3 moveAmount = Vector3.zero;
+    private float wobble = 0;
     
     // Start is called before the first frame update
     //-------------------------------------------------------------------------------------------------------------
@@ -26,26 +27,30 @@ public class Player : MonoBehaviour
 
         // Movement by keyboard inputs that adjust our move value
         if(Input.GetKey(KeyCode.A))
-        {
             moveAmount.x -= 1;
-        }
-
         if (Input.GetKey(KeyCode.D))
-        {
             moveAmount.x += 1;
-        }
-
         if (Input.GetKey(KeyCode.W))
-        {
             moveAmount.y += 1;
-        }
-        
         if (Input.GetKey(KeyCode.S))
-        {
             moveAmount.y -= 1;
-        }
+        
         moveAmount = moveAmount.normalized * speed;
         rigidbody.MovePosition(currentPosition + moveAmount * Time.deltaTime);
+
+        // have the rotation of the skeleton wobble like he's walking
+        if (moveAmount.magnitude > 0)
+        {
+            wobble += Time.deltaTime;
+            transform.rotation = Quaternion.Euler(new Vector3(0,0,Mathf.Sin(wobble*35)*7));
+        }
+        else
+        {
+            transform.rotation = Quaternion.identity;
+            wobble = 0;
+        }
+
+        // reverses the scale of the skeleton
         Vector3 newScale = transform.localScale;
         if (moveAmount.x > 0 && newScale.x < 0 || moveAmount.x < 0 && newScale.x > 0) {
             newScale.x *= -1;

@@ -3,7 +3,8 @@ Shader "Custom/CRTShader"
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
-        _ScreenBulge("Screen Bulge", Range(0.0, 1.0)) = 0.5
+        _ScreenBulge("Screen Bulge", Range(0.0, 2.0)) = 0.5
+        _WiggleFactor("Wiggle factor", Range(0.0, 35.0)) = 0.5
         _WebExport("Web Export Bool 0 = off 1 = on", Int) = 0
     }
     SubShader
@@ -41,11 +42,11 @@ Shader "Custom/CRTShader"
 
             sampler2D _MainTex;
             float _ScreenBulge;
+            float _WiggleFactor;
             int _WebExport;
 
-            fixed4 frag(v2f i) : SV_Target
+            int2 findScreenSize(v2f i)
             {
-                // fixed4 col = tex2D(_MainTex, i.uv);
                 int2 screen_size;
                 if (_WebExport == 0)
                 {
@@ -56,51 +57,53 @@ Shader "Custom/CRTShader"
                     screen_size = int2((int)(i.vertex.x / i.uv.x), (int)(i.vertex.y / (i.uv.y)));
                     //i.vertex.y = screen_size.y - i.vertex.y;
                 }
+                return screen_size;
+            }
 
-                // wiggly lines
-                float2 uv_from_center = i.uv - float2(0.5, 0.5);
-                float dist_from_center = sqrt(pow(uv_from_center.x, 2) + pow(uv_from_center.y, 2));
-                float2 disp = float2(sin(i.vertex.y / 10 + _Time[1] * 5) / 600, sin(i.vertex.x / 10 + _Time[1] * 5) / 600) * dist_from_center * 5;
-                float2 disp_uv = i.uv + disp;
-
-                // bulging glass
-                float tv_factor = _ScreenBulge;
-                
-                disp_uv.x += pow((float)uv_from_center.y, 2) * uv_from_center.x * tv_factor;
-                disp_uv.y += pow((float)uv_from_center.x, 2) * uv_from_center.y * tv_factor;
-
-                int2 disp_vertex = i.vertex;
-                //disp_vertex.x -= (pow((float)disp_uv_from_center.y, 2) * disp_uv_from_center.x * tv_factor) * screen_size.x;
-                //disp_vertex.y -= (pow((float)disp_uv_from_center.x, 2) * disp_uv_from_center.y * tv_factor) * screen_size.y;
-
-                // does weird stuff
-                //disp_uv += disp_uv_from_center / dist_from_center * tv_factor;
-
+            // glitch that looks like a wave going down the screen
+            // uv               The original uv coordinate of the pixel
+            // wave_width       The percent of the screen the wave should take up vertically
+            // wave_depth       The percent of the screen the wave will pull the uv
+            // wave_speed       The speed at which the wave moves down
+            // screen_percent   How far down the line will move
+            float2 GlitchWaveEffectUV(float2 uv, float wave_width = 0.01, float wave_depth = 0.02, float wave_speed = 2, float hardness = 1.25, float screen_percent = 1, float start = 0)
+            {
                 // moving wave glitch 
-                float wave_width = 0.01;
-                float wave_depth = 0.01;
-                float wave_speed = 2;
-                float screen_percent = 1;
-                float glitch_spot = 1 - ((_Time[0] * wave_speed) % screen_percent);
-                if (i.uv.y > glitch_spot - wave_width && i.uv.y < glitch_spot + wave_width)
+                float2 disp = float2(0,0);
+                float glitch_spot = 1 - ((_Time[0] * wave_speed) % screen_percent + start);
+                if (uv.y > glitch_spot - wave_width && uv.y < glitch_spot + wave_width)
                 {
-                    float down = 1-pow(abs(glitch_spot - i.uv.y)*100,1.25);
-                    disp_uv.x += wave_depth * down;
+                    float delta_x = 1 - pow(abs(glitch_spot - uv.y) / wave_width, hardness);
+                    disp.x += wave_depth * delta_x;
                 }
+                return disp;
+            }
 
-                // gets the color
-                fixed4 col = tex2D(_MainTex, disp_uv);
-                // darkening
-                // col.rgb = 0;
-                
+            // wiggly lines
+            float2 WigglyLineEffectUV(float2 uv, int2 vertex, float scale)
+            {
+                float2 uv_from_center = uv - float2(0.5, 0.5);
+                float dist_from_center = sqrt(pow(uv_from_center.x, 2) + pow(uv_from_center.y, 2));
+                float2 disp = float2(sin(vertex.y / 10 + _Time[1] * 5) / 600, sin(vertex.x / 10 + _Time[1] * 5) / 600) * dist_from_center * scale;
+                return disp;
+            }
 
-                // haze effect
-                float haze_speed = 1;
-                float haze_amplitude = 0.005;
+            // bulging TV glass
+            float2 GlassBend(float2 uv, float tv_factor)
+            {
+                float2 disp = float2(0, 0);
+                disp.x += pow((uv.y - 0.5), 2) * (uv.x - 0.5) * tv_factor;
+                disp.y += pow((uv.x - 0.5), 2) * (uv.y - 0.5) * tv_factor;
+                return disp;
+            }
+
+            // haze effect
+            fixed4 HazeEffect(fixed4 col, float2 uv, float haze_speed = 1, float haze_amplitude = 0.002)
+            {
                 float delta = sin(_Time[1] * haze_speed) * haze_amplitude;
                 // colors on the delta pixels
-                fixed4 add_red = tex2D(_MainTex, disp_uv + float2(delta, 0));
-                fixed4 add_blue = tex2D(_MainTex, disp_uv + float2(-delta, 0));
+                fixed4 add_red = tex2D(_MainTex, uv + float2(delta, 0));
+                fixed4 add_blue = tex2D(_MainTex, uv + float2(-delta, 0));
                 float delta_redness = add_red.r - min(add_red.g, add_red.b);
                 float delta_blueness = add_blue.b - min(add_blue.g, add_blue.r);
                 float redness = col.r - min(col.g, col.b);
@@ -109,63 +112,68 @@ Shader "Custom/CRTShader"
                 if (delta_redness > redness) {
                     col.r += delta_redness - redness;
                 }
-                if (delta_blueness > max(0,blueness)) {
+                if (delta_blueness > max(0, blueness)) {
                     col.b += delta_blueness - blueness;
                 }
 
-                // tv lines
-                float width = 2;
-                int thickness = 2;
-                if (disp_vertex.y%(width+thickness) < thickness)
-                {
-                    col.rgb = 0.1;
-                }
+                return col;
+            }
+
+            // returns true when underneath the tv line pixles
+            bool TVLinePixel(int2 vertex, float width = 2, int thickness = 2)
+            {
+                return (vertex.y % (width + thickness) < thickness);
+            }
+
+            // borders that clap
+            float BorderDarkness(int2 vertex, float2 uv, int2 screen_size, float border = 75)
+            {
+                float darkness = 1;
+                //upper -- lower in web
+                if (uv.y * screen_size.y < border)
+                    darkness *= (uv.y * screen_size.y / border);
+                // lower -- upper in the web
+                else if (uv.y * screen_size.y > screen_size.y - border)
+                    darkness *= (screen_size.y - uv.y * screen_size.y) / border;
+                // left
+                if (uv.x * screen_size.x < border)
+                    darkness *= (uv.x * screen_size.x / border);
+                // right
+                else if (uv.x * screen_size.x > screen_size.x - border)
+                    darkness *= (screen_size.x - uv.x * screen_size.x) / border;
                 
+                // outer box
+                if (uv.x < 0 || uv.x > 1 || uv.y < 0 || uv.y > 1)
+                    darkness = 0;
+
+                return darkness;
+            }
+
+            fixed4 frag(v2f i) : SV_Target
+            {
+                // finds the screensize in pixels
+                int2 screen_size = findScreenSize(i);
+                
+                // wiggly lines and bulging glass
+                float2 disp_uv = i.uv + WigglyLineEffectUV(i.uv, i.vertex, _WiggleFactor) + GlassBend(i.uv, _ScreenBulge);
+
+                // moving wave glitchs
+                disp_uv = disp_uv + GlitchWaveEffectUV(i.uv, 0.01, 0.01, 2, 1.25, 0.25, 0.75);
+                disp_uv = disp_uv + GlitchWaveEffectUV(i.uv, 0.03, 0.02, 3, 10, 1, 0);
+
+                // gets the color
+                fixed4 col = tex2D(_MainTex, disp_uv);
+
+                // haze effect
+                col = HazeEffect(col, disp_uv);
+
+                // tv lines
+                if (TVLinePixel(i.vertex))
+                    col.rgb = 0;
 
                 // dark border
-                float border = 50;
-                if (i.vertex.y < border) //upper -- exports to lower in web
-                {
-                    col.rgb = col.rgb * (i.vertex.y / border);
-                }
-                else if (i.vertex.y > screen_size.y - border) // lower -- upper in the web
-                {
-                    col.rgb = col.rgb * (screen_size.y - i.vertex.y) / border;
-                }
-                if (i.vertex.x < border) // left
-                {
-                    col.rgb = col.rgb * (i.vertex.x / border);
-                }
-                else if (i.vertex.x > screen_size.x - border)
-                {
-                    col.rgb = col.rgb * (screen_size.x - i.vertex.x) / border;
-                }
-                /*float border = 0.05;
-                if (i.uv.y < border)
-                {
-                    col.rgb = col.rgb * i.uv.y / border;
-                }
-                else if (i.uv.y > 1 - border)
-                {
-                    col.rgb = col.rgb * (1 - i.uv.y) / border;
-                }
-                if (i.uv.x < border)
-                {
-                    col.rgb = col.rgb * i.uv.x / border;
-                }
-                else if (i.uv.x > 1 - border)
-                {
-                    col.rgb = col.rgb * (1 - i.uv.x) / border;
-                }*/
+                col.rgb = col.rgb * BorderDarkness(i.vertex, i.uv + GlassBend(i.uv, _ScreenBulge), screen_size);
 
-                // Flashing light
-                // col.rgb = col.rgb + sin(_Time[1]*10) * 0.05;
-
-                // Flashing dark
-                //col.rgb = col.rgb * 0.8 - 0.3 + sin(_Time[1]*2) * 0.05;
-
-                // just invert the colors
-                // col.rgb = 1 - col.rgb;
                 return col;
             }
             ENDCG

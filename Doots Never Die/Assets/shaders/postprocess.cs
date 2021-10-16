@@ -9,6 +9,7 @@ public class postprocess : MonoBehaviour
 
     private void OnRenderImage(RenderTexture source, RenderTexture destination)
     {
+        //mat.SetFloat("_ScreenBulge", 0.2f);
         Graphics.Blit(source, destination, mat);
     }
 }

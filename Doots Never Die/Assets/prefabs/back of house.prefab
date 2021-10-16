@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 8978103722172579651}
   - component: {fileID: 1910268962745308491}
   - component: {fileID: 2039082465297198367}
+  - component: {fileID: 8447248914781108033}
+  - component: {fileID: 1510340607}
   m_Layer: 0
   m_Name: back of house
   m_TagString: Untagged
@@ -51,7 +53,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 4b921d1a55995044a9282e8222fed9f7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -72,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 83cb70a970dcac4449d576f0ea2d3c1d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 19443f1c93b40624f8136e0c03753731, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -96,7 +98,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.0010960251, y: -0.05699271}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -107,5 +109,45 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.11, y: 0.99}
+  m_Size: {x: 0.98505473, y: 0.8760146}
   m_EdgeRadius: 0
+--- !u!68 &8447248914781108033
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5442521831049734960}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -0.374722, y: 0.3099382}
+  - {x: -0.5497036, y: 0.309549}
+  - {x: -0.54963267, y: 0.33645374}
+  - {x: -0.40007213, y: 0.48925278}
+  - {x: 0.41077492, y: 0.49096733}
+  - {x: 0.5482795, y: 0.34891233}
+  - {x: 0.55012196, y: 0.31000158}
+  - {x: 0.4712655, y: 0.312127}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0
+--- !u!114 &1510340607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5442521831049734960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85134157b701e1b4cae843d27d3021bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
