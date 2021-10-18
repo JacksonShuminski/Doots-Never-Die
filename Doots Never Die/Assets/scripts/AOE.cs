@@ -5,7 +5,7 @@ using UnityEngine;
 public class AOE : MonoBehaviour
 {
 
-    public CircleCollider2D circle;
+    public GameObject circle;
     
     //Holds and sets timer
     private float timer;
@@ -15,20 +15,27 @@ public class AOE : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        circle.enabled = false; //Or however colliders are deactivated
         timer = maxTime;
     }
 
     // Update is called once per frame
     void Update()
     {
+        //When space is pressed, activate AOE
+        if(Input.GetKeyDown(KeyCode.Space) && timer == maxTime)
+        {
+            ActivateTrigger();
+        }
+        
+        
+        
         if (startTimer)
         {
             timer -= Time.deltaTime;
 
             if (timer <= 0)
             {
-                circle.enabled = false;
+                Destroy(circle); //Does not work as intended
                 timer = maxTime;
                 startTimer = false;
             }
@@ -40,7 +47,7 @@ public class AOE : MonoBehaviour
     /// </summary>
     void ActivateTrigger()
     {
-        circle.enabled = true;
+        Instantiate(circle, gameObject.transform.position, gameObject.transform.rotation);
         startTimer = true;
     }
 }
