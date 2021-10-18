@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 9178609645808984058}
   - component: {fileID: 3951178455865401104}
   - component: {fileID: 4728087810726921801}
+  - component: {fileID: 7116313463571477669}
+  - component: {fileID: 379031910224418871}
   m_Layer: 0
   m_Name: DootSkeleton
   m_TagString: Untagged
@@ -162,6 +164,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dootpf: {fileID: 4102059553130538830, guid: c147044227ea3dd49987b0695bbdbd4e, type: 3}
   projectileList: []
+--- !u!58 &7116313463571477669
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2105571644274778159}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.0097654825, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.44320044
+--- !u!114 &379031910224418871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2105571644274778159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 665f23079cf44e344b728c0c569e7b15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  circle: {fileID: 7116313463571477669}
+  maxTime: 1
 --- !u!1 &4728087810776670446
 GameObject:
   m_ObjectHideFlags: 0
