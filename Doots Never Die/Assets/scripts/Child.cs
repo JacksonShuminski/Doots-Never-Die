@@ -34,9 +34,8 @@ public class Child : MonoBehaviour
 
     // Update is called once per frame
     //-------------------------------------------------------------------------------------------------------------
-    void FixedUpdate()
+    void Update()
     {
-        GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 
         //I will need to know how projectiles are done to make this work
         if (aim.projectileList.Count > 0)
@@ -71,7 +70,7 @@ public class Child : MonoBehaviour
         }
         
         //moving towards the player if they get close
-        else if(Vector3.Distance(player.transform.position, currentPosition) < 5)
+        else if(Vector3.Distance(player.transform.position, currentPosition) < 2)
         {
             moveAmount = new Vector3(player.transform.position.x - currentPosition.x, 
                                      player.transform.position.y - currentPosition.y, 0);
@@ -80,7 +79,7 @@ public class Child : MonoBehaviour
         //randomized wandering otherwise
         else if (timer == 0)
         {
-            moveAmount = new Vector3(Random.Range(-1, 2), Random.Range(-1, 2), 0);
+            moveAmount = new Vector3(Random.Range(-1.0f, 2.0f), Random.Range(-1.0f, 2.0f), 0);
         }
 
         //updating timers
