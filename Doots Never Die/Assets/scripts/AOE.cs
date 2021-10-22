@@ -6,6 +6,7 @@ public class AOE : MonoBehaviour
 {
 
     public GameObject circle;
+    private DestroyOnTimer destroyTimer;
     
     //Holds and sets timer
     private float timer;
@@ -16,10 +17,12 @@ public class AOE : MonoBehaviour
     void Start()
     {
         timer = maxTime;
+        destroyTimer = circle.GetComponent<DestroyOnTimer>();
+        destroyTimer.maxTime = maxTime; //Syncs up the timers
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         //When space is pressed, activate AOE
         if(Input.GetKeyDown(KeyCode.Space) && timer == maxTime)
@@ -35,7 +38,6 @@ public class AOE : MonoBehaviour
 
             if (timer <= 0)
             {
-                Destroy(circle); //Does not work as intended
                 timer = maxTime;
                 startTimer = false;
             }

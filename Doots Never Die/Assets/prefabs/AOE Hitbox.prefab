@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 4630704203032525453}
   - component: {fileID: 4630704203032525452}
   - component: {fileID: 1031230835564872944}
+  - component: {fileID: 2531210247691492306}
   m_Layer: 0
   m_Name: AOE Hitbox
-  m_TagString: Untagged
+  m_TagString: Hitbox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,3 +100,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2531210247691492306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4630704203032525443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 438163bac797b8649a02db08d7590ce1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxTime: 1
