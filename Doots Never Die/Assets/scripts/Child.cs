@@ -117,4 +117,15 @@ public class Child : MonoBehaviour
             scareDuration = 0;
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == "Hitbox")
+        {
+            hp -= 10;
+            scared = true;
+            scareDuration = 0;
+            //Debug.Log("Hit!"); //Tests if collison works
+        }
+    }
 }
