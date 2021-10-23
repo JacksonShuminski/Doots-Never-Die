@@ -10,18 +10,25 @@ public class Player : MonoBehaviour
     public float speed;
     public Vector3 moveAmount = Vector3.zero;
     private float wobble = 0;
+
+    //Timer/HP
+    public float maxTime;
+    public float timer; //Isn't going to be set in editor
     
     // Start is called before the first frame update
     //-------------------------------------------------------------------------------------------------------------
     void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();
+        timer = maxTime;
     }
 
     // Update is called once per frame
     //-------------------------------------------------------------------------------------------------------------
     void FixedUpdate()
     {
+        timer -= Time.deltaTime; //Deceases the timer
+        
         moveAmount = Vector3.zero;
         currentPosition = transform.position;
 
@@ -56,5 +63,15 @@ public class Player : MonoBehaviour
             newScale.x *= -1;
         }
         transform.localScale = newScale;
+    }
+
+    /// <summary>
+    /// Displays the timer. Uses default Unity UI(Temp) 
+    /// </summary>
+    private void OnGUI()
+    {
+        GUI.color = Color.white;
+        GUI.skin.box.fontSize = 20;
+        GUI.Box(new Rect(100, 340, 200, 100), timer + " seconds");
     }
 }
