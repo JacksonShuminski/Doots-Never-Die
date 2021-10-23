@@ -49,6 +49,7 @@ public class Child : MonoBehaviour
         //if the child is too scared, they leave the game
         if(hp <= 0)
         {
+            player.timer += 5.0f;
             Destroy(gameObject);
             return;
         }
@@ -115,6 +116,18 @@ public class Child : MonoBehaviour
             hp -= 10;
             scared = true;
             scareDuration = 0;
+        }
+    }
+
+    /// <summary>
+    /// Checks for the player and takes HP off them
+    /// </summary>
+    /// <param name="collision"></param>
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collider.IsTouching(player.GetComponent<BoxCollider2D>()))
+        {
+            player.timer -= 5.0f;
         }
     }
 
