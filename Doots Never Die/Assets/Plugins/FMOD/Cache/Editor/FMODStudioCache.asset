@@ -15,7 +15,7 @@ MonoBehaviour:
   Path: ../DootsNeverDieSound/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637701655842206383
+  lastModified: 637702816157585758
   FileSizes:
   - Name: Desktop
     Value: 1012
@@ -41,7 +41,7 @@ MonoBehaviour:
   - {fileID: -9050292333734401290}
   StringsBanks:
   - {fileID: 7476335396537451639}
-  stringsBankWriteTime: 637701655842255912
+  stringsBankWriteTime: 637702816157839646
   cacheVersion: 8
 --- !u!114 &7476335396537451639
 MonoBehaviour:
@@ -58,7 +58,7 @@ MonoBehaviour:
   Path: ../DootsNeverDieSound/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637701655842255912
+  lastModified: 637702816157839646
   FileSizes:
   - Name: Desktop
     Value: 700
