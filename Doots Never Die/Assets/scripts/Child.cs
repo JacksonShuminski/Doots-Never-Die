@@ -16,6 +16,7 @@ public class Child : MonoBehaviour
 
     public Player player;
     public Aim aim;
+    public Spawner spawner;
     public int hp;
     public int speed;
 
@@ -50,6 +51,7 @@ public class Child : MonoBehaviour
         if(hp <= 0)
         {
             player.timer += 5.0f;
+            spawner.children.Remove(gameObject);
             Destroy(gameObject);
             return;
         }
