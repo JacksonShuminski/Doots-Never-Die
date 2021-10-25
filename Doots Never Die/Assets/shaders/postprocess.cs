@@ -6,10 +6,12 @@ using UnityEngine;
 public class postprocess : MonoBehaviour
 {
     public Material mat;
+    public Player player;
 
     private void OnRenderImage(RenderTexture source, RenderTexture destination)
     {
-        //mat.SetFloat("_ScreenBulge", 0.2f);
+        float wiggle = (1-(player.timer / player.maxTime)) * 25;
+        mat.SetFloat("_WiggleFactor", wiggle);
         Graphics.Blit(source, destination, mat);
     }
 }

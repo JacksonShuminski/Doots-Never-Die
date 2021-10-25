@@ -6,6 +6,7 @@ Shader "Custom/CRTShader"
         _ScreenBulge("Screen Bulge", Range(0.0, 2.0)) = 0.5
         _WiggleFactor("Wiggle factor", Range(0.0, 35.0)) = 0.5
         _WebExport("Web Export Bool 0 = off 1 = on", Int) = 0
+        _Scream("Scream wave", Range(0.0, 1.0)) = 0.0
     }
     SubShader
     {
@@ -43,6 +44,7 @@ Shader "Custom/CRTShader"
             sampler2D _MainTex;
             float _ScreenBulge;
             float _WiggleFactor;
+            float _Scream;
             int _WebExport;
 
             int2 findScreenSize(v2f i)
@@ -77,6 +79,13 @@ Shader "Custom/CRTShader"
                     disp.x += wave_depth * delta_x;
                 }
                 return disp;
+            }
+
+            float2 ScreamWaveEffect(float2 uv, int2 screen_size)
+            {
+                float2 pixels_from_center = uv - float2(0.5, 0.5);
+                pixels_from_center = pixels_from_center * screen_size;
+
             }
 
             // wiggly lines

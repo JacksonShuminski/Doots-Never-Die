@@ -1557,6 +1557,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mat: {fileID: 2100000, guid: 433909a2d9216c2498ade62051aee37b, type: 2}
+  player: {fileID: 2028814640}
 --- !u!114 &1886748359
 MonoBehaviour:
   m_ObjectHideFlags: 0
