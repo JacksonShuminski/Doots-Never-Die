@@ -50,9 +50,9 @@ public class Child : MonoBehaviour
         }
 
         //if the child is too scared, they leave the game
-        if(hp <= 0)
+        if (hp <= 0)
         {
-            player.timer += 5.0f;
+            player.timer += 1.25f;
             spawner.children.Remove(gameObject);
             Destroy(gameObject);
             return;
@@ -61,38 +61,74 @@ public class Child : MonoBehaviour
         //if the child has been scared for 5 seconds, it is no longer scared. A projectile resets this counter
         //also, the counter will reset on its own in 5 seconds so that the int doesn't increase
         //to infinity and cause memory issues
-        if(scareDuration > 300)
+        if (scareDuration > 300)
         {
             scared = false;
             scareDuration = 0;
         }
 
         //moving directly away from the player if scared
-        if(scared == true)
+        if (scared == true)
         {
-            moveAmount = new Vector3(-player.transform.position.x + currentPosition.x, 
+            moveAmount = new Vector3(-player.transform.position.x + currentPosition.x,
                                      -player.transform.position.y + currentPosition.y, 0);
         }
-        
-        //moving towards the player if they get close
-        else if(Vector3.Distance(player.transform.position, currentPosition) < 2)
+
+        //"difficulty" scales on time remaining - this increases risk at low timer, with more chances to
+        //recover time
+        else if (player.timer > 150)
         {
-            moveAmount = new Vector3(player.transform.position.x - currentPosition.x, 
-                                     player.transform.position.y - currentPosition.y, 0);
+            speed = 5;
+            //moving towards the player if they get close
+            if (Vector3.Distance(player.transform.position, currentPosition) < 2)
+            {
+                moveAmount = new Vector3(player.transform.position.x - currentPosition.x,
+                                         player.transform.position.y - currentPosition.y, 0);
+            }
+
+            //randomized wandering
+            else if (timer == 0)
+            {
+                moveAmount = new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f), 0);
+            }
         }
 
-        //randomized wandering otherwise
-        else if (timer == 0)
+        else if (player.timer > 50)
         {
-            moveAmount = new Vector3(Random.Range(-1.0f, 2.0f), Random.Range(-1.0f, 2.0f), 0);
+            speed = 10;
+            if (Vector3.Distance(player.transform.position, currentPosition) < 3)
+            {
+                moveAmount = new Vector3(player.transform.position.x - currentPosition.x,
+                                         player.transform.position.y - currentPosition.y, 0);
+            }
+
+            else if (timer == 0)
+            {
+                moveAmount = new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f), 0);
+            }
+        }
+
+        else if (player.timer <= 50)
+        {
+            speed = 15;
+            if (Vector3.Distance(player.transform.position, currentPosition) < 5)
+            {
+                moveAmount = new Vector3(player.transform.position.x - currentPosition.x,
+                                         player.transform.position.y - currentPosition.y, 0);
+            }
+
+            else if (timer == 0)
+            {
+                moveAmount = new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f), 0);
+            }
         }
 
         //updating timers
         timer++;
         scareDuration++;
 
-        //if two seconds have passed - change directions
-        if(timer > 120)
+        //if two seconds have passed - change directions if randomly wandering
+        if (timer > 120)
         {
             timer = 0;
         }
