@@ -63,20 +63,20 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _Height: 905
+    - _Height: 523
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _Scream: 0.216
+    - _Scream: 1
     - _ScreenBulge: 0.66
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
     - _WebExport: 0
-    - _Width: 933
-    - _WiggleFactor: 25
+    - _Width: 795
+    - _WiggleFactor: 15
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
