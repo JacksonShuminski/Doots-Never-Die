@@ -5,7 +5,9 @@ Shader "Custom/CRTShader"
         _MainTex ("Texture", 2D) = "white" {}
         _ScreenBulge("Screen Bulge", Range(0.0, 2.0)) = 0.5
         _WiggleFactor("Wiggle factor", Range(0.0, 35.0)) = 0.5
-        _WebExport("Web Export Bool 0 = off 1 = on", Int) = 0
+        _Width("Width of the screen in pixels", Int) = 0
+        _Height("Height of the screen in pixels", Int) = 0
+        _Scream("Scream wave", Range(0.0, 1.0)) = 0.0
     }
     SubShader
     {
@@ -43,22 +45,10 @@ Shader "Custom/CRTShader"
             sampler2D _MainTex;
             float _ScreenBulge;
             float _WiggleFactor;
-            int _WebExport;
+            float _Scream;
+            int _Width;
+            int _Height;
 
-            int2 findScreenSize(v2f i)
-            {
-                int2 screen_size;
-                if (_WebExport == 0)
-                {
-                    screen_size = int2((int)(i.vertex.x / i.uv.x), (int)(i.vertex.y / (1 - i.uv.y)));
-                }
-                else
-                {
-                    screen_size = int2((int)(i.vertex.x / i.uv.x), (int)(i.vertex.y / (i.uv.y)));
-                    //i.vertex.y = screen_size.y - i.vertex.y;
-                }
-                return screen_size;
-            }
 
             // glitch that looks like a wave going down the screen
             // uv               The original uv coordinate of the pixel
@@ -77,6 +67,29 @@ Shader "Custom/CRTShader"
                     disp.x += wave_depth * delta_x;
                 }
                 return disp;
+            }
+
+            float2 ScreamWaveEffect(float2 uv)
+            {
+                int2 screen_size = int2(_Width, _Height);
+                float2 pixels_from_center = (uv - float2(0.5, 0.5)) * screen_size;
+                float dist_from_center = length(pixels_from_center);
+
+                int closest_wall_pixels = min(_Width/2, _Height/2);
+                int wave_peak = _Scream * closest_wall_pixels;
+
+                float distance_to_displace = dist_from_center - (float)wave_peak;
+                float2 disp_uv;
+                if (distance_to_displace > 0)
+                {
+                    disp_uv = normalize(pixels_from_center) * distance_to_displace;
+                }
+                
+                return disp_uv;
+
+
+
+                //float displacement_ammount = ;
             }
 
             // wiggly lines
@@ -126,21 +139,21 @@ Shader "Custom/CRTShader"
             }
 
             // borders that clap
-            float BorderDarkness(int2 vertex, float2 uv, int2 screen_size, float border = 75)
+            float BorderDarkness(int2 vertex, float2 uv, float border = 75)
             {
                 float darkness = 1;
                 //upper -- lower in web
-                if (uv.y * screen_size.y < border)
-                    darkness *= (uv.y * screen_size.y / border);
+                if (uv.y * _Height < border)
+                    darkness *= (uv.y * _Height / border);
                 // lower -- upper in the web
-                else if (uv.y * screen_size.y > screen_size.y - border)
-                    darkness *= (screen_size.y - uv.y * screen_size.y) / border;
+                else if (uv.y * _Height > _Height - border)
+                    darkness *= (_Height - uv.y * _Height) / border;
                 // left
-                if (uv.x * screen_size.x < border)
-                    darkness *= (uv.x * screen_size.x / border);
+                if (uv.x * _Width < border)
+                    darkness *= (uv.x * _Width / border);
                 // right
-                else if (uv.x * screen_size.x > screen_size.x - border)
-                    darkness *= (screen_size.x - uv.x * screen_size.x) / border;
+                else if (uv.x * _Width > _Width - border)
+                    darkness *= (_Width - uv.x * _Width) / border;
                 
                 // outer box
                 if (uv.x < 0 || uv.x > 1 || uv.y < 0 || uv.y > 1)
@@ -151,15 +164,14 @@ Shader "Custom/CRTShader"
 
             fixed4 frag(v2f i) : SV_Target
             {
-                // finds the screensize in pixels
-                int2 screen_size = findScreenSize(i);
-                
                 // wiggly lines and bulging glass
-                float2 disp_uv = i.uv + WigglyLineEffectUV(i.uv, i.vertex, _WiggleFactor) + GlassBend(i.uv, _ScreenBulge);
+                float2 disp_uv = i.uv;
+                //disp_uv = disp_uv + WigglyLineEffectUV(i.uv, i.vertex, _WiggleFactor) + GlassBend(i.uv, _ScreenBulge);
 
                 // moving wave glitchs
                 disp_uv = disp_uv + GlitchWaveEffectUV(i.uv, 0.01, 0.01, 2, 1.25, 0.25, 0.75);
                 disp_uv = disp_uv + GlitchWaveEffectUV(i.uv, 0.03, 0.02, 3, 10, 1, 0);
+                //disp_uv = disp_uv + ScreamWaveEffect(i.uv);
 
                 // gets the color
                 fixed4 col = tex2D(_MainTex, disp_uv);
@@ -172,7 +184,7 @@ Shader "Custom/CRTShader"
                     col.rgb = 0;
 
                 // dark border
-                col.rgb = col.rgb * BorderDarkness(i.vertex, i.uv + GlassBend(i.uv, _ScreenBulge), screen_size);
+                col.rgb = col.rgb * BorderDarkness(i.vertex, i.uv + GlassBend(i.uv, _ScreenBulge));
 
                 return col;
             }

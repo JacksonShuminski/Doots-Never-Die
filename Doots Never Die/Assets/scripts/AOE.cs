@@ -9,7 +9,7 @@ public class AOE : MonoBehaviour
     private DestroyOnTimer destroyTimer;
     
     //Holds and sets timer
-    private float timer;
+    public float timer;
     public float maxTime;
     private bool startTimer; //Be sure to have this updated and set wherever the input will be handled
     
@@ -22,12 +22,14 @@ public class AOE : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         //When space is pressed, activate AOE
         if(Input.GetKeyDown(KeyCode.Space) && timer == maxTime)
         {
             ActivateTrigger();
+
+            Debug.Log("AOE");
         }
         
         
@@ -49,7 +51,9 @@ public class AOE : MonoBehaviour
     /// </summary>
     void ActivateTrigger()
     {
-        Instantiate(circle, gameObject.transform.position, gameObject.transform.rotation);
+        GameObject scream = Instantiate(circle, transform.position, transform.rotation);
+        Destroy(scream, 1);
+        scream.transform.parent = transform;
         startTimer = true;
     }
 }
