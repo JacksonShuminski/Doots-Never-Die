@@ -13,6 +13,7 @@ public class Child : MonoBehaviour
     private bool scared;
     private int scareDuration;
     private int timer;
+    public Sprite[] sprites;
 
     public Player player;
     public Aim aim;
@@ -31,6 +32,7 @@ public class Child : MonoBehaviour
         rigidBody = GetComponent<Rigidbody2D>();
         collider = GetComponent<BoxCollider2D>();
         moveAmount = Vector3.zero;
+        GetComponent<SpriteRenderer>().sprite = sprites[Random.Range(0, sprites.Length)];
     }
 
     // Update is called once per frame

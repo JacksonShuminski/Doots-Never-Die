@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 2838814518459126941}
   - component: {fileID: 6968271328430155820}
   - component: {fileID: 3016035303410660460}
-  - component: {fileID: 9178609645808984058}
-  - component: {fileID: 3951178455865401104}
   - component: {fileID: 4728087810726921801}
   - component: {fileID: 379031910224418871}
+  - component: {fileID: 9178609645808984058}
+  - component: {fileID: 3951178455865401104}
   m_Layer: 0
   m_Name: DootSkeleton
   m_TagString: Untagged
@@ -100,9 +100,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62a03abb992f03947832ab27fda2220d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.6
+  speed: 6
   moveAmount: {x: 0, y: 0, z: 0}
   maxTime: 180
+  timer: 0
+--- !u!114 &4728087810726921801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2105571644274778159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cda2004b87cf2be40ab414c16e3ca89e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dootpf: {fileID: 4102059553130538830, guid: c147044227ea3dd49987b0695bbdbd4e, type: 3}
+  projectileList: []
+  firerate: 0.2
+--- !u!114 &379031910224418871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2105571644274778159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 665f23079cf44e344b728c0c569e7b15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  circle: {fileID: 4630704203032525443, guid: 5b962dd8118a4044ea80dc226d973561, type: 3}
+  maxTime: 1
 --- !u!50 &9178609645808984058
 Rigidbody2D:
   serializedVersion: 4
@@ -137,7 +167,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0028702393, y: -0.11911559}
+  m_Offset: {x: -0.0028702393, y: -0.012403436}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -148,36 +178,8 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.1655569, y: 0.08176881}
+  m_Size: {x: 0.1655569, y: 0.29519314}
   m_EdgeRadius: 0
---- !u!114 &4728087810726921801
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2105571644274778159}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cda2004b87cf2be40ab414c16e3ca89e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dootpf: {fileID: 4102059553130538830, guid: c147044227ea3dd49987b0695bbdbd4e, type: 3}
-  projectileList: []
---- !u!114 &379031910224418871
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2105571644274778159}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 665f23079cf44e344b728c0c569e7b15, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  circle: {fileID: 4630704203032525443, guid: 5b962dd8118a4044ea80dc226d973561, type: 3}
-  maxTime: 1
 --- !u!1 &4728087810776670446
 GameObject:
   m_ObjectHideFlags: 0
@@ -234,7 +236,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4728087810960998372}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.08, y: 0, z: 0}
+  m_LocalPosition: {x: 0.08, y: 0, z: -1.24}
   m_LocalScale: {x: 0.05, y: 0.05, z: 1}
   m_Children:
   - {fileID: 4728087811749216961}

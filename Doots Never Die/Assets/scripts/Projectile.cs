@@ -20,6 +20,8 @@ public class Projectile : MonoBehaviour
         direction =  GetMousePosition().normalized - transform.position.normalized;
         //transform.eulerAngles = new Vector3(0, 0, Vector3.Angle(direction, transform.forward));
         timer = 0;
+        transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(Random.Range(0, 1.0f), Random.Range(0, 1.0f), Random.Range(0, 1.0f));
+        transform.GetChild(0).up = Vector3.up;
     }
 
     // Update is called once per frame

@@ -8,6 +8,14 @@ public class Aim : MonoBehaviour
     // Base Variables
     [SerializeField] private GameObject dootpf;
     public List<GameObject> projectileList;
+    public float firerate;
+    private float cooldown_acc;
+
+
+    // Getting position data for GameObject
+    private GameObject aimTransform;
+    private GameObject bugleEndTransform;
+    private bool scaleSwitch = false;
 
     /*
     public event EventHandler<OnShootEventArgs> OnShoot;
@@ -18,16 +26,12 @@ public class Aim : MonoBehaviour
     }
     */
 
-    // Getting position data for GameObject
-    private GameObject aimTransform;
-    private GameObject bugleEndTransform;
-    private bool scaleSwitch = false;
-
     //-------------------------------------------------------------------------------------------------------------
     private void Awake()
     {
         aimTransform = GameObject.Find("Aim");
         bugleEndTransform = GameObject.Find("BugleEndPosition");
+        cooldown_acc = 0;
     }
 
     // Update is called once per frame
@@ -61,21 +65,28 @@ public class Aim : MonoBehaviour
     //-------------------------------------------------------------------------------------------------------------
     private void PlayerShoot()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (cooldown_acc > firerate)
         {
-
-            GameObject shot = Instantiate(dootpf, bugleEndTransform.transform.position, Quaternion.identity);
-            shot.GetComponent<Projectile>().skel_vel = GetComponent<Player>().moveAmount;
-
-            if (transform.localScale.x < 0)
+            if (Input.GetMouseButton(0))
             {
-                shot.transform.up = bugleEndTransform.transform.right*-1;
-            }else
-            {
-                shot.transform.up = bugleEndTransform.transform.right;
+                GameObject shot = Instantiate(dootpf, bugleEndTransform.transform.position, Quaternion.identity);
+                shot.GetComponent<Projectile>().skel_vel = GetComponent<Player>().moveAmount;
+
+                if (transform.localScale.x < 0)
+                {
+                    shot.transform.up = bugleEndTransform.transform.right*-1;
+                }else
+                {
+                    shot.transform.up = bugleEndTransform.transform.right;
+                }
+
+                projectileList.Add(shot);
+                cooldown_acc = 0;
             }
-
-            projectileList.Add(shot);
+        }
+        else
+        {
+            cooldown_acc += Time.deltaTime;
         }
     }
 

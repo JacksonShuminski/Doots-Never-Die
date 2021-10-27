@@ -59,7 +59,11 @@ public class Player : MonoBehaviour
 
         // reverses the scale of the skeleton
         Vector3 newScale = transform.localScale;
-        if (moveAmount.x > 0 && newScale.x < 0 || moveAmount.x < 0 && newScale.x > 0) {
+        //if (moveAmount.x > 0 && newScale.x < 0 || moveAmount.x < 0 && newScale.x > 0) {
+        //    newScale.x *= -1;
+        //}
+        if (Input.mousePosition.x > Screen.width/2 && newScale.x < 0 || Input.mousePosition.x < Screen.width / 2 && newScale.x > 0)
+        {
             newScale.x *= -1;
         }
         transform.localScale = newScale;
