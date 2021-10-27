@@ -68,7 +68,7 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _Scream: 0
+    - _Scream: 0.216
     - _ScreenBulge: 0.66
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
