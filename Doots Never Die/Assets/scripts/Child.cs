@@ -52,7 +52,7 @@ public class Child : MonoBehaviour
         //if the child is too scared, they leave the game
         if (hp <= 0)
         {
-            player.timer += 1.25f;
+            player.timer += 1.35f;
             spawner.children.Remove(gameObject);
             Destroy(gameObject);
             return;
@@ -70,6 +70,7 @@ public class Child : MonoBehaviour
         //moving directly away from the player if scared
         if (scared == true)
         {
+            speed = 5;
             moveAmount = new Vector3(-player.transform.position.x + currentPosition.x,
                                      -player.transform.position.y + currentPosition.y, 0);
         }
