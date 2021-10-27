@@ -86,6 +86,7 @@ Shader "Custom/CRTShader"
                 float2 pixels_from_center = uv - float2(0.5, 0.5);
                 pixels_from_center = pixels_from_center * screen_size;
 
+                //float displacement_ammount = ;
             }
 
             // wiggly lines
