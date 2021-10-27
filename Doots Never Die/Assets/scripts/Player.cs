@@ -27,7 +27,10 @@ public class Player : MonoBehaviour
     //-------------------------------------------------------------------------------------------------------------
     void FixedUpdate()
     {
-        timer -= Time.deltaTime; //Deceases the timer
+        if (timer > 0)
+        {
+            timer -= Time.deltaTime; //Deceases the timer
+        }
         
         moveAmount = Vector3.zero;
         currentPosition = transform.position;
