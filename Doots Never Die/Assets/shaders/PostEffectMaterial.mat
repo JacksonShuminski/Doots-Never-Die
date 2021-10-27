@@ -74,7 +74,7 @@ Material:
     - _SrcBlend: 1
     - _UVSec: 0
     - _WebExport: 0
-    - _WiggleFactor: 25
+    - _WiggleFactor: 25.000025
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
