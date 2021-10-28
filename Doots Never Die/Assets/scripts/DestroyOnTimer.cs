@@ -9,11 +9,17 @@ public class DestroyOnTimer : MonoBehaviour
     private float timer;
 
     //Screen shake
-    
+    private Shake shake;
+    private GameObject shakeManager;
     
     void Start()
     {
         timer = maxTime;
+        
+        //Finds the object that holds the shake script and call it
+        shakeManager = GameObject.FindGameObjectWithTag("ScreenShake");
+        shake = shakeManager.GetComponent<Shake>();
+        shake.CamShake();
     }
 
     // Update is called once per frame

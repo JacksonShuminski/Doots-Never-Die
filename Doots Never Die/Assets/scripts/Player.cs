@@ -3,6 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+public enum GameState
+{
+    Play,
+    Pause,
+    End
+}
+
 public class Player : MonoBehaviour
 {
     // Base Variables
@@ -11,6 +18,7 @@ public class Player : MonoBehaviour
     public float speed;
     public Vector3 moveAmount = Vector3.zero;
     private float wobble = 0;
+    GameState gameState;
 
     //Timer/HP
     public float maxTime;
@@ -25,6 +33,7 @@ public class Player : MonoBehaviour
     {
         rigidbody = GetComponent<Rigidbody2D>();
         timer = maxTime;
+        gameState = GameState.Play;
     }
 
     // Update is called once per frame
@@ -40,46 +49,64 @@ public class Player : MonoBehaviour
         if(timer <= 0)
         {
             SceneManager.LoadScene("GameEnd");
-        }
-        
-        moveAmount = Vector3.zero;
-        currentPosition = transform.position;
-
-        // Movement by keyboard inputs that adjust our move value
-        if(Input.GetKey(KeyCode.A))
-            moveAmount.x -= 1;
-        if (Input.GetKey(KeyCode.D))
-            moveAmount.x += 1;
-        if (Input.GetKey(KeyCode.W))
-            moveAmount.y += 1;
-        if (Input.GetKey(KeyCode.S))
-            moveAmount.y -= 1;
-        
-        moveAmount = moveAmount.normalized * speed;
-        rigidbody.MovePosition(currentPosition + moveAmount * Time.deltaTime);
-
-        // have the rotation of the skeleton wobble like he's walking
-        if (moveAmount.magnitude > 0)
-        {
-            wobble += Time.deltaTime;
-            transform.rotation = Quaternion.Euler(new Vector3(0,0,Mathf.Sin(wobble*35)*7));
-        }
-        else
-        {
-            transform.rotation = Quaternion.identity;
-            wobble = 0;
+            gameState = GameState.End;
         }
 
-        // reverses the scale of the skeleton
-        Vector3 newScale = transform.localScale;
-        //if (moveAmount.x > 0 && newScale.x < 0 || moveAmount.x < 0 && newScale.x > 0) {
-        //    newScale.x *= -1;
-        //}
-        if (Input.mousePosition.x > Screen.width/2 && newScale.x < 0 || Input.mousePosition.x < Screen.width / 2 && newScale.x > 0)
+        if (gameState == GameState.Pause && Input.GetKey(KeyCode.P))
         {
-            newScale.x *= -1;
+            Time.timeScale = 1;
+            gameState = GameState.Play;
         }
-        transform.localScale = newScale;
+
+        if(gameState == GameState.Play)
+        {
+            moveAmount = Vector3.zero;
+            currentPosition = transform.position;
+
+            // Movement by keyboard inputs that adjust our move value
+            if (Input.GetKey(KeyCode.A))
+                moveAmount.x -= 1;
+            if (Input.GetKey(KeyCode.D))
+                moveAmount.x += 1;
+            if (Input.GetKey(KeyCode.W))
+                moveAmount.y += 1;
+            if (Input.GetKey(KeyCode.S))
+                moveAmount.y -= 1;
+
+            if (Input.GetKey(KeyCode.P))
+            {
+                Time.timeScale = 0;
+                gameState = GameState.Pause;
+            }
+
+
+            moveAmount = moveAmount.normalized * speed;
+            rigidbody.MovePosition(currentPosition + moveAmount * Time.deltaTime);
+
+            // have the rotation of the skeleton wobble like he's walking
+            if (moveAmount.magnitude > 0)
+            {
+                wobble += Time.deltaTime;
+                transform.rotation = Quaternion.Euler(new Vector3(0, 0, Mathf.Sin(wobble * 35) * 7));
+            }
+            else
+            {
+                transform.rotation = Quaternion.identity;
+                wobble = 0;
+            }
+
+            // reverses the scale of the skeleton
+            Vector3 newScale = transform.localScale;
+            //if (moveAmount.x > 0 && newScale.x < 0 || moveAmount.x < 0 && newScale.x > 0) {
+            //    newScale.x *= -1;
+            //}
+            if (Input.mousePosition.x > Screen.width / 2 && newScale.x < 0 || Input.mousePosition.x < Screen.width / 2 && newScale.x > 0)
+            {
+                newScale.x *= -1;
+            }
+
+            transform.localScale = newScale;
+        }
     }
 
     /// <summary>
