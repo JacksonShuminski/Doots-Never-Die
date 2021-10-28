@@ -1719,6 +1719,7 @@ MonoBehaviour:
   - {fileID: 1969160724}
   - {fileID: 1983487674}
   - {fileID: 1812170762}
+  camera: {fileID: 1886748356}
 --- !u!4 &1238084175
 Transform:
   m_ObjectHideFlags: 0
