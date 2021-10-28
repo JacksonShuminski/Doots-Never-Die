@@ -22,12 +22,15 @@ public class Spawner : MonoBehaviour
         {
             int randomSpawn = Random.Range(0, spawnPoints.Count);
             Vector3 toCam = camera.transform.position - spawnPoints[randomSpawn].transform.position;
+            toCam.z = 0;
             if (toCam.sqrMagnitude > 6*6)
             {
+                Debug.Log(toCam.sqrMagnitude);
+                Debug.Log(randomSpawn);
                 GameObject spawn = Instantiate(child, spawnPoints[randomSpawn].transform.position, Quaternion.identity);
                 children.Add(spawn);
-                timer = 0;
-                Debug.Log("Spawner: " + randomSpawn);
+                timer = 0; 
+                spawnPoints[randomSpawn].transform.position = spawnPoints[randomSpawn].transform.position;
             }
         }
         timer++;
