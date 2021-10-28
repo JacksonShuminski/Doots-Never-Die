@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
     public Vector3 moveAmount = Vector3.zero;
     private float wobble = 0;
     GameState gameState;
+    GameState state;
 
     //Timer/HP
     public float maxTime;
@@ -40,26 +41,20 @@ public class Player : MonoBehaviour
     //-------------------------------------------------------------------------------------------------------------
     void FixedUpdate()
     {
-        //Timer
-        if (timer > 0)
+        if (gameState == GameState.Play)
         {
-            timer -= Time.deltaTime; //Deceases the timer
-        }
+            //Timer
+            if (timer > 0)
+            {
+                timer -= Time.deltaTime; //Deceases the timer
+            }
 
-        if(timer <= 0)
-        {
-            SceneManager.LoadScene("GameEnd");
-            gameState = GameState.End;
-        }
+            if (timer <= 0)
+            {
+                SceneManager.LoadScene("GameEnd");
+                gameState = GameState.End;
+            }
 
-        if (gameState == GameState.Pause && Input.GetKey(KeyCode.P))
-        {
-            Time.timeScale = 1;
-            gameState = GameState.Play;
-        }
-
-        if(gameState == GameState.Play)
-        {
             moveAmount = Vector3.zero;
             currentPosition = transform.position;
 
@@ -75,8 +70,8 @@ public class Player : MonoBehaviour
 
             if (Input.GetKey(KeyCode.P))
             {
-                Time.timeScale = 0;
                 gameState = GameState.Pause;
+                Time.timeScale = 0;
             }
 
 
@@ -106,6 +101,12 @@ public class Player : MonoBehaviour
             }
 
             transform.localScale = newScale;
+        }
+
+        if (gameState == GameState.Pause && Input.GetKey(KeyCode.P))
+        {
+            Time.timeScale = 1;
+            gameState = GameState.Play;
         }
     }
 
