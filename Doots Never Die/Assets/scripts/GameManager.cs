@@ -24,16 +24,16 @@ public class GameManager : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        if (Input.GetKey(KeyCode.P) && state == GameState.Menu)
+    { 
+        if (Input.GetKeyDown(KeyCode.Space) && state == GameState.Menu)
         {
             SceneManager.LoadScene("Game");
             state = GameState.Play;
         }
 
-        if (Input.GetKey(KeyCode.P) && state == GameState.Play)
+        if (Input.GetKeyDown(KeyCode.P) && state == GameState.Play)
         {
-            SceneManager.LoadScene("SaumilScene");
+            SceneManager.LoadScene("MainMenu");
             state = GameState.Menu;
         }
     }
