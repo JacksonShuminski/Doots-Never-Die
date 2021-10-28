@@ -7,34 +7,40 @@ public enum GameState
 {
     Menu,
     Play,
+    Pause,
     End
 }
 public class GameManager : MonoBehaviour
 {
     // Start is called before the first frame update
     GameState state;
-    bool test;
 
     void Start()
     {
         DontDestroyOnLoad(transform.gameObject);
         state = GameState.Menu;
-        test = false;
     }
 
     // Update is called once per frame
     void Update()
-    { 
-        if (Input.GetKeyDown(KeyCode.Space) && state == GameState.Menu)
+    {
+
+        if (state == GameState.Menu && Input.GetKeyDown(KeyCode.Space))
         {
             SceneManager.LoadScene("Game");
             state = GameState.Play;
         }
 
-        if (Input.GetKeyDown(KeyCode.P) && state == GameState.Play)
+        if (state == GameState.Play &&  Input.GetKeyDown(KeyCode.P))
         {
-            SceneManager.LoadScene("MainMenu");
-            state = GameState.Menu;
+            SceneManager.LoadScene("SaumilScene");
+            state = GameState.Pause;
+        }
+
+        if(state == GameState.Pause && Input.GetKeyDown(KeyCode.P))
+        {
+            SceneManager.LoadScene("Game");
+            state = GameState.Play;
         }
     }
 }

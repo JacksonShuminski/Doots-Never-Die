@@ -462,7 +462,7 @@ GameObject:
   - component: {fileID: 1341820092}
   - component: {fileID: 1341820091}
   m_Layer: 0
-  m_Name: GameManagerZach
+  m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
