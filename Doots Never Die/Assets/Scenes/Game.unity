@@ -849,6 +849,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cefe46bf5e732a846a951b451f1a0e22, type: 3}
+--- !u!114 &652035975 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 379031910224418871, guid: 958ffdbcb4175ed40802033aa3140061, type: 3}
+  m_PrefabInstance: {fileID: 388910169}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 665f23079cf44e344b728c0c569e7b15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &749355148
 GameObject:
   m_ObjectHideFlags: 0
@@ -1835,6 +1846,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mat: {fileID: 2100000, guid: 802d880e8827a4446bf5e1476dbb6a18, type: 2}
   player: {fileID: 2028814640}
+  aoe_script: {fileID: 652035975}
 --- !u!114 &1886748359
 MonoBehaviour:
   m_ObjectHideFlags: 0
