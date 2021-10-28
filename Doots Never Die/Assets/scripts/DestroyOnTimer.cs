@@ -7,6 +7,9 @@ public class DestroyOnTimer : MonoBehaviour
     // Start is called before the first frame update
     public float maxTime;
     private float timer;
+
+    //Screen shake
+    
     
     void Start()
     {
