@@ -63,7 +63,11 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
+<<<<<<< HEAD
     - _Height: 383
+=======
+    - _Height: 521
+>>>>>>> parent of 4a0b96f (Revert "Merge branch 'main' of https://github.com/JacksonShuminski/Doots-Never-Die")
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
@@ -75,8 +79,13 @@ Material:
     - _SrcBlend: 1
     - _UVSec: 0
     - _WebExport: 0
+<<<<<<< HEAD
     - _Width: 937
     - _WiggleFactor: 25
+=======
+    - _Width: 715
+    - _WiggleFactor: 15
+>>>>>>> parent of 4a0b96f (Revert "Merge branch 'main' of https://github.com/JacksonShuminski/Doots-Never-Die")
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
