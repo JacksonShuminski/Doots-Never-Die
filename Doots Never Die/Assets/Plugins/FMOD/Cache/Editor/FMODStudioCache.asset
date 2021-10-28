@@ -16,7 +16,11 @@ MonoBehaviour:
   Name: Master
   StudioPath: bank:/Master
 <<<<<<< HEAD
+<<<<<<< HEAD
   lastModified: 637706800308917437
+=======
+  lastModified: 637703449376027596
+>>>>>>> parent of 4a0b96f (Revert "Merge branch 'main' of https://github.com/JacksonShuminski/Doots-Never-Die")
 =======
   lastModified: 637703449376027596
 >>>>>>> parent of 4a0b96f (Revert "Merge branch 'main' of https://github.com/JacksonShuminski/Doots-Never-Die")
@@ -46,7 +50,11 @@ MonoBehaviour:
   StringsBanks:
   - {fileID: 7476335396537451639}
 <<<<<<< HEAD
+<<<<<<< HEAD
   stringsBankWriteTime: 637706800308927432
+=======
+  stringsBankWriteTime: 637703449376077640
+>>>>>>> parent of 4a0b96f (Revert "Merge branch 'main' of https://github.com/JacksonShuminski/Doots-Never-Die")
 =======
   stringsBankWriteTime: 637703449376077640
 >>>>>>> parent of 4a0b96f (Revert "Merge branch 'main' of https://github.com/JacksonShuminski/Doots-Never-Die")
@@ -67,7 +75,11 @@ MonoBehaviour:
   Name: Master.strings
   StudioPath: bank:/Master.strings
 <<<<<<< HEAD
+<<<<<<< HEAD
   lastModified: 637706800308927432
+=======
+  lastModified: 637703449376077640
+>>>>>>> parent of 4a0b96f (Revert "Merge branch 'main' of https://github.com/JacksonShuminski/Doots-Never-Die")
 =======
   lastModified: 637703449376077640
 >>>>>>> parent of 4a0b96f (Revert "Merge branch 'main' of https://github.com/JacksonShuminski/Doots-Never-Die")
