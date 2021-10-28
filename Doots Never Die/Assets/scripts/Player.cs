@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
     public float speed;
     public Vector3 moveAmount = Vector3.zero;
     private float wobble = 0;
-    GameState gameState;
+    public GameState gameState;
     GameState state;
 
     //Timer/HP
@@ -39,7 +39,7 @@ public class Player : MonoBehaviour
 
     // Update is called once per frame
     //-------------------------------------------------------------------------------------------------------------
-    void FixedUpdate()
+    void Update()
     {
         if (gameState == GameState.Play)
         {
@@ -68,12 +68,12 @@ public class Player : MonoBehaviour
             if (Input.GetKey(KeyCode.S))
                 moveAmount.y -= 1;
 
-            if (Input.GetKey(KeyCode.P))
+
+            if (Input.GetKeyDown(KeyCode.P))
             {
                 gameState = GameState.Pause;
                 Time.timeScale = 0;
             }
-
 
             moveAmount = moveAmount.normalized * speed;
             rigidbody.MovePosition(currentPosition + moveAmount * Time.deltaTime);
@@ -102,11 +102,16 @@ public class Player : MonoBehaviour
 
             transform.localScale = newScale;
         }
-
-        if (gameState == GameState.Pause && Input.GetKey(KeyCode.P))
+        else
         {
-            Time.timeScale = 1;
-            gameState = GameState.Play;
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                if (gameState == GameState.Pause)
+                {
+                    Time.timeScale = 1;
+                    gameState = GameState.Play;
+                }
+            }
         }
     }
 

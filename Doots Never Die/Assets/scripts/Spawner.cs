@@ -25,12 +25,10 @@ public class Spawner : MonoBehaviour
             toCam.z = 0;
             if (toCam.sqrMagnitude > 6*6)
             {
-                Debug.Log(toCam.sqrMagnitude);
-                Debug.Log(randomSpawn);
                 GameObject spawn = Instantiate(child, spawnPoints[randomSpawn].transform.position, Quaternion.identity);
                 children.Add(spawn);
                 timer = 0; 
-                spawnPoints[randomSpawn].transform.position = spawnPoints[randomSpawn].transform.position;
+                spawnPoints[randomSpawn].transform.position += new Vector3(Random.Range(-2,2), Random.Range(-2,2), 0);
             }
         }
         timer++;
