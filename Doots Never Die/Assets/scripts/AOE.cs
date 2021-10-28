@@ -28,6 +28,8 @@ public class AOE : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space) && timer == maxTime)
         {
             ActivateTrigger();
+
+            Debug.Log("AOE");
         }
         
         
