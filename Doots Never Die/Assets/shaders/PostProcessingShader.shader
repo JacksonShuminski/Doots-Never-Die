@@ -71,25 +71,28 @@ Shader "Custom/CRTShader"
 
             float2 ScreamWaveEffect(float2 uv)
             {
-                int2 screen_size = int2(_Width, _Height);
-                float2 pixels_from_center = (uv - float2(0.5, 0.5)) * screen_size;
-                float dist_from_center = length(pixels_from_center);
-
-                int closest_wall_pixels = min(_Width/2, _Height/2);
-                int wave_peak = _Scream * closest_wall_pixels;
-
-                float distance_to_displace = dist_from_center - (float)wave_peak;
-                float2 disp_uv;
-                if (distance_to_displace > 0)
+                if (_Scream < 1)
                 {
-                    disp_uv = normalize(pixels_from_center) * distance_to_displace;
+                    int2 screen_size = int2(_Width, _Height);
+                    float2 pixels_from_center = (uv - float2(0.5, 0.5)) * screen_size;
+                    float dist_from_center = length(pixels_from_center);
+
+                    int closest_wall_pixels = min(_Width / 2, _Height / 2);
+                    int wave_peak = _Scream * closest_wall_pixels;
+
+                    float distance_from_wave = dist_from_center - (float)wave_peak;
+                    float wave_length = 50 + _Scream * 100;
+                    float distance_to_displace = 0;
+                    if (distance_from_wave > 0 && distance_from_wave < wave_length)
+                    {
+                        distance_to_displace += (1 - pow(((distance_from_wave / wave_length) - 0.5) * 2, 2)) / max(100 * _Scream, 20);
+                    }
+
+                    float2 disp_uv = normalize(uv - float2(0.5, 0.5)) * distance_to_displace;
+
+                    return disp_uv;
                 }
-                
-                return disp_uv;
-
-
-
-                //float displacement_ammount = ;
+                return float2(0, 0);
             }
 
             // wiggly lines
@@ -167,6 +170,7 @@ Shader "Custom/CRTShader"
                 // wiggly lines and bulging glass
                 float2 disp_uv = i.uv;
                 //disp_uv = disp_uv + WigglyLineEffectUV(i.uv, i.vertex, _WiggleFactor) + GlassBend(i.uv, _ScreenBulge);
+                disp_uv = disp_uv + ScreamWaveEffect(i.uv);
 
                 // moving wave glitchs
                 disp_uv = disp_uv + GlitchWaveEffectUV(i.uv, 0.01, 0.01, 2, 1.25, 0.25, 0.75);
