@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: PostEffectMaterial
+  m_Name: PostProcessingMaterial
   m_Shader: {fileID: 4800000, guid: 767118ef069b80e44a9bf9102c2c98b5, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -63,36 +63,19 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-<<<<<<< HEAD
-<<<<<<< HEAD
-    - _Height: 383
-=======
-    - _Height: 521
->>>>>>> parent of 4a0b96f (Revert "Merge branch 'main' of https://github.com/JacksonShuminski/Doots-Never-Die")
-=======
-    - _Height: 521
->>>>>>> parent of 4a0b96f (Revert "Merge branch 'main' of https://github.com/JacksonShuminski/Doots-Never-Die")
+    - _Height: 520
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _Scream: 0
-    - _ScreenBulge: 0.66
+    - _ScreenBulge: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
-    - _WebExport: 0
-<<<<<<< HEAD
-<<<<<<< HEAD
-    - _Width: 937
-    - _WiggleFactor: 25
-=======
-=======
->>>>>>> parent of 4a0b96f (Revert "Merge branch 'main' of https://github.com/JacksonShuminski/Doots-Never-Die")
     - _Width: 715
-    - _WiggleFactor: 15
->>>>>>> parent of 4a0b96f (Revert "Merge branch 'main' of https://github.com/JacksonShuminski/Doots-Never-Die")
+    - _WiggleFactor: 25
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
