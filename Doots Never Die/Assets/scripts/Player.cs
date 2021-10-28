@@ -77,8 +77,8 @@ public class Player : MonoBehaviour
     /// </summary>
     private void OnGUI()
     {
-        //GUI.color = Color.white;
-        //GUI.skin.box.fontSize = 20;
-        //GUI.Box(new Rect(100, 340, 200, 100), timer + " seconds");
+        GUI.color = Color.white;
+        GUI.skin.box.fontSize = 20;
+        GUI.Box(new Rect(100, 340, 200, 100), timer + " seconds");
     }
 }
