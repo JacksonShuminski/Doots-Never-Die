@@ -20,12 +20,14 @@ public class Spawner : MonoBehaviour
     {
         if(children.Count <= 100 && timer >= 180)
         {
-            int randomSpawn = Random.Range(0, 9);
-            if (!camera.rect.Contains(spawnPoints[randomSpawn].transform.position))
+            int randomSpawn = Random.Range(0, spawnPoints.Count);
+            Vector3 toCam = camera.transform.position - spawnPoints[randomSpawn].transform.position;
+            if (toCam.sqrMagnitude > 6*6)
             {
                 GameObject spawn = Instantiate(child, spawnPoints[randomSpawn].transform.position, Quaternion.identity);
                 children.Add(spawn);
                 timer = 0;
+                Debug.Log("Spawner: " + randomSpawn);
             }
         }
         timer++;
