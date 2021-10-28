@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -14,6 +15,9 @@ public class Player : MonoBehaviour
     //Timer/HP
     public float maxTime;
     public float timer; //Isn't going to be set in editor
+
+    //Score
+    public int score;
     
     // Start is called before the first frame update
     //-------------------------------------------------------------------------------------------------------------
@@ -27,9 +31,15 @@ public class Player : MonoBehaviour
     //-------------------------------------------------------------------------------------------------------------
     void FixedUpdate()
     {
+        //Timer
         if (timer > 0)
         {
             timer -= Time.deltaTime; //Deceases the timer
+        }
+
+        if(timer <= 0)
+        {
+            SceneManager.LoadScene("GameEnd");
         }
         
         moveAmount = Vector3.zero;
