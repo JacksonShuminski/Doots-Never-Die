@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameEnd.unity
     guid: 9427a79a0609c3d42ad0a9006c2d6aa9
+  - enabled: 1
+    path: Assets/Scenes/Poem.unity
+    guid: 85994a08c412046438d0c1545edf27ca
   m_configObjects: {}
