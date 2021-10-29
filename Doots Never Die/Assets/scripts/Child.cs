@@ -54,7 +54,7 @@ public class Child : MonoBehaviour
         //if the child is too scared, they leave the game
         if (hp <= 0)
         {
-            player.timer += 1.75f;
+            player.timer += 0.75f;
             player.score += 1;
             spawner.children.Remove(gameObject);
             Destroy(gameObject);
