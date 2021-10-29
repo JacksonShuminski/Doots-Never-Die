@@ -55,7 +55,6 @@ public class Child : MonoBehaviour
         if (hp <= 0)
         {
             player.timer += 0.75f;
-            player.score += 1;
             spawner.children.Remove(gameObject);
             Destroy(gameObject);
             return;
