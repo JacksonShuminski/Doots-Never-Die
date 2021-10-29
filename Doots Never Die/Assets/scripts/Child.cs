@@ -75,6 +75,7 @@ public class Child : MonoBehaviour
         {
             moveAmount = new Vector3(-player.transform.position.x + currentPosition.x,
                                      -player.transform.position.y + currentPosition.y, 0);
+            speed = startSpeed;
         }
 
         //"difficulty" scales on time remaining - this increases risk at low timer, with more chances to
@@ -146,6 +147,7 @@ public class Child : MonoBehaviour
     private void FixedUpdate()
     {
         //updating where the object is located
+        currentPosition = rigidBody.position;
         currentPosition += moveAmount * Time.deltaTime;
         rigidBody.MovePosition(currentPosition);
     }

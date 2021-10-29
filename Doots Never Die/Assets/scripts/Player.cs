@@ -49,7 +49,12 @@ public class Player : MonoBehaviour
                 timer -= Time.deltaTime; //Deceases the timer
             }
 
-            if (timer <= 0)
+            if (timer > maxTime * 1.2f)
+            {
+                timer = maxTime * 1.2f;
+            }
+
+                if (timer <= 0)
             {
                 SceneManager.LoadScene("GameEnd");
                 gameState = GameState.End;
