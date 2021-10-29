@@ -16,6 +16,7 @@ public class Aim : MonoBehaviour
     private GameObject aimTransform;
     private GameObject bugleEndTransform;
     private bool scaleSwitch = false;
+    private GameState gamestate;
 
     /*
     public event EventHandler<OnShootEventArgs> OnShoot;
@@ -38,8 +39,12 @@ public class Aim : MonoBehaviour
     //-------------------------------------------------------------------------------------------------------------
     void Update()
     {
-        PlayerAim();
-        PlayerShoot();
+        gamestate = GetComponent<Player>().gameState;
+        if (gamestate == GameState.Play)
+        {
+            PlayerAim();
+            PlayerShoot();
+        }
     }
 
     // Base aiming method

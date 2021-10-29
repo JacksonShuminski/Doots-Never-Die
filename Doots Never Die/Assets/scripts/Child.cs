@@ -52,7 +52,8 @@ public class Child : MonoBehaviour
         //if the child is too scared, they leave the game
         if (hp <= 0)
         {
-            player.timer += 1.25f;
+            player.timer += 1.75f;
+            player.score += 1;
             spawner.children.Remove(gameObject);
             Destroy(gameObject);
             return;
@@ -76,7 +77,7 @@ public class Child : MonoBehaviour
 
         //"difficulty" scales on time remaining - this increases risk at low timer, with more chances to
         //recover time
-        else if (player.timer > 150)
+        else if (player.timer > 20)
         {
             speed = 5;
             //moving towards the player if they get close
@@ -93,7 +94,7 @@ public class Child : MonoBehaviour
             }
         }
 
-        else if (player.timer > 50)
+        else if (player.timer > 10)
         {
             speed = 10;
             if (Vector3.Distance(player.transform.position, currentPosition) < 3)
@@ -108,7 +109,7 @@ public class Child : MonoBehaviour
             }
         }
 
-        else if (player.timer <= 50)
+        else if (player.timer <= 10)
         {
             speed = 15;
             if (Vector3.Distance(player.transform.position, currentPosition) < 5)
@@ -167,7 +168,7 @@ public class Child : MonoBehaviour
     {
         if (collider.IsTouching(player.GetComponent<BoxCollider2D>()))
         {
-            player.timer -= 5.0f;
+            player.timer -= .5f;
         }
     }
 

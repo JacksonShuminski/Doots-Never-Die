@@ -1,6 +1,29 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-9050292333734401290
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d32cf7c32a3ed8347bac48ef5ed56d82, type: 3}
+  m_Name: FMODStudioCache
+  m_EditorClassIdentifier: 
+  EditorBanks:
+  - {fileID: 7160611051436068248}
+  - {fileID: 4465387461253989578}
+  EditorEvents: []
+  EditorParameters: []
+  MasterBanks:
+  - {fileID: 4465387461253989578}
+  StringsBanks:
+  - {fileID: 7160611051436068248}
+  stringsBankWriteTime: 637703449376077640
+  cacheVersion: 8
+--- !u!114 &4465387461253989578
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -15,35 +38,12 @@ MonoBehaviour:
   Path: ../DootsNeverDieSound/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637706800308917437
+  lastModified: 637703449376027596
   FileSizes:
   - Name: Desktop
     Value: 1012
   Exists: 1
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d32cf7c32a3ed8347bac48ef5ed56d82, type: 3}
-  m_Name: FMODStudioCache
-  m_EditorClassIdentifier: 
-  EditorBanks:
-  - {fileID: 7476335396537451639}
-  - {fileID: -9050292333734401290}
-  EditorEvents: []
-  EditorParameters: []
-  MasterBanks:
-  - {fileID: -9050292333734401290}
-  StringsBanks:
-  - {fileID: 7476335396537451639}
-  stringsBankWriteTime: 637706800308927432
-  cacheVersion: 8
---- !u!114 &7476335396537451639
+--- !u!114 &7160611051436068248
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -58,7 +58,7 @@ MonoBehaviour:
   Path: ../DootsNeverDieSound/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637706800308927432
+  lastModified: 637703449376077640
   FileSizes:
   - Name: Desktop
     Value: 700
