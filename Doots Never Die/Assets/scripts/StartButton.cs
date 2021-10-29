@@ -21,7 +21,7 @@ public class StartButton : MonoBehaviour
             GetComponent<SpriteRenderer>().color = new Color(0.75f, 0.75f, 0.75f);
             if (Input.GetMouseButton(0))
             {
-                SceneManager.LoadScene("Game");
+                SceneManager.LoadScene("Poem");
             }
         }
         else
