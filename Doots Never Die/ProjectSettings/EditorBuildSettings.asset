@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 28bfa02ac6e01104187b055fb7d6f75c
   - enabled: 1
-    path: Assets/Scenes/Graveyard.unity
+    path: Assets/Scenes/Extra.unity
     guid: 1dfdf7f3dbc36004b9db97475165d5d6
   - enabled: 1
     path: Assets/Scenes/Game.unity

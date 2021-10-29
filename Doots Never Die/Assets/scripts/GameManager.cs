@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            SceneManager.LoadScene("Graveyard");
+            SceneManager.LoadScene("Extra");
         }
     }
 }
