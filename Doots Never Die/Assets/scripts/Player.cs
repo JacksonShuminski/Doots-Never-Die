@@ -69,7 +69,7 @@ public class Player : MonoBehaviour
                 moveAmount.y -= 1;
 
 
-            if (Input.GetKeyDown(KeyCode.P))
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
                 gameState = GameState.Pause;
                 Time.timeScale = 0;
@@ -104,7 +104,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            if (Input.GetKeyDown(KeyCode.P))
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
                 if (gameState == GameState.Pause)
                 {
