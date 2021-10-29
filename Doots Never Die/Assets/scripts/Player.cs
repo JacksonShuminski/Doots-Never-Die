@@ -41,6 +41,7 @@ public class Player : MonoBehaviour
         rigidbody = GetComponent<Rigidbody2D>();
         timer = maxTime;
         gameState = GameState.Play;
+        Time.timeScale = 1;
     }
 
     // Update is called once per frame
