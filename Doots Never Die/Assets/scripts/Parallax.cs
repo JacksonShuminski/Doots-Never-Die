@@ -48,12 +48,12 @@ public class Parallax : MonoBehaviour
             if (transform.position.x + screenBounds.x > lastChild.transform.position.x + halfObjectWidth)
             {
                 firstChild.transform.SetAsLastSibling();
-                firstChild.transform.position = new Vector3(lastChild.transform.position.x + halfObjectWidth * 2, lastChild.transform.position.y, lastChild.transform.position.z);
+                firstChild.transform.position = new Vector3(lastChild.transform.position.x + halfObjectWidth * 2.0812f, lastChild.transform.position.y, lastChild.transform.position.z);
             }
             else if (transform.position.x - screenBounds.x < firstChild.transform.position.x - halfObjectWidth)
             {
                 lastChild.transform.SetAsFirstSibling();
-                lastChild.transform.position = new Vector3(firstChild.transform.position.x - halfObjectWidth * 2, firstChild.transform.position.y, firstChild.transform.position.z);
+                lastChild.transform.position = new Vector3(firstChild.transform.position.x - halfObjectWidth * 2.0812f, firstChild.transform.position.y, firstChild.transform.position.z);
             }
         }
     }
