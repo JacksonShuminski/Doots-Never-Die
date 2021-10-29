@@ -27,6 +27,12 @@ public class Player : MonoBehaviour
 
     //Score
     public int score;
+
+    public GameState GetState
+    {
+        get { return gameState; }
+    }
+
     
     // Start is called before the first frame update
     //-------------------------------------------------------------------------------------------------------------
