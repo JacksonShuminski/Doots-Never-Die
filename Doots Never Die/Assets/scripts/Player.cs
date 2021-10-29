@@ -49,7 +49,12 @@ public class Player : MonoBehaviour
                 timer -= Time.deltaTime; //Deceases the timer
             }
 
-            if (timer <= 0)
+            if (timer > maxTime * 1.2f)
+            {
+                timer = maxTime * 1.2f;
+            }
+
+                if (timer <= 0)
             {
                 SceneManager.LoadScene("GameEnd");
                 gameState = GameState.End;
@@ -69,26 +74,13 @@ public class Player : MonoBehaviour
                 moveAmount.y -= 1;
 
 
-            if (Input.GetKeyDown(KeyCode.P))
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
                 gameState = GameState.Pause;
                 Time.timeScale = 0;
             }
 
             moveAmount = moveAmount.normalized * speed;
-            rigidbody.MovePosition(currentPosition + moveAmount * Time.deltaTime);
-
-            // have the rotation of the skeleton wobble like he's walking
-            if (moveAmount.magnitude > 0)
-            {
-                wobble += Time.deltaTime;
-                transform.rotation = Quaternion.Euler(new Vector3(0, 0, Mathf.Sin(wobble * 35) * 7));
-            }
-            else
-            {
-                transform.rotation = Quaternion.identity;
-                wobble = 0;
-            }
 
             // reverses the scale of the skeleton
             Vector3 newScale = transform.localScale;
@@ -104,7 +96,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            if (Input.GetKeyDown(KeyCode.P))
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
                 if (gameState == GameState.Pause)
                 {
@@ -112,6 +104,23 @@ public class Player : MonoBehaviour
                     gameState = GameState.Play;
                 }
             }
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        rigidbody.MovePosition(currentPosition + moveAmount * Time.deltaTime);
+
+        // have the rotation of the skeleton wobble like he's walking
+        if (moveAmount.magnitude > 0)
+        {
+            wobble += Time.deltaTime;
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, Mathf.Sin(wobble * 35) * 7));
+        }
+        else
+        {
+            transform.rotation = Quaternion.identity;
+            wobble = 0;
         }
     }
 

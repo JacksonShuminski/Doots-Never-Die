@@ -15,5 +15,14 @@ public class CameraLock : MonoBehaviour
     {
         Vector3 targetPosition = target.TransformPoint(0, 0, -10); //Set to when the player starts to go off screen
         transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothness);
+
+        if (target.gameObject.GetComponent<Player>().gameState == GameState.Pause)
+        {
+            GetComponent<AudioSource>().volume = 0.07f;
+        }
+        else
+        {
+            GetComponent<AudioSource>().volume = 0.54f;
+        }
     }
 }
