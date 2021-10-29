@@ -20,15 +20,18 @@ public class Child : MonoBehaviour
     public Spawner spawner;
     public int hp;
     public int speed;
+    private int startSpeed;
 
     // Start is called before the first frame update
     // Setting our base variables to their proper values
     //-------------------------------------------------------------------------------------------------------------
     void Start()
     {
+        startSpeed = speed;
         scared = false;
         timer = 0;
         hp = 40;
+        currentPosition = transform.position;
         rigidBody = GetComponent<Rigidbody2D>();
         collider = GetComponent<BoxCollider2D>();
         moveAmount = Vector3.zero;
@@ -39,7 +42,6 @@ public class Child : MonoBehaviour
     //-------------------------------------------------------------------------------------------------------------
     void Update()
     {
-
         //I will need to know how projectiles are done to make this work
         if (aim.projectileList.Count > 0)
         {
@@ -79,7 +81,7 @@ public class Child : MonoBehaviour
         //recover time
         else if (player.timer > 20)
         {
-            speed = 5;
+            speed = startSpeed;
             //moving towards the player if they get close
             if (Vector3.Distance(player.transform.position, currentPosition) < 2)
             {
@@ -96,7 +98,7 @@ public class Child : MonoBehaviour
 
         else if (player.timer > 10)
         {
-            speed = 10;
+            speed = (int)(startSpeed * 1.5);
             if (Vector3.Distance(player.transform.position, currentPosition) < 3)
             {
                 moveAmount = new Vector3(player.transform.position.x - currentPosition.x,
@@ -111,7 +113,7 @@ public class Child : MonoBehaviour
 
         else if (player.timer <= 10)
         {
-            speed = 15;
+            speed = startSpeed * 2;
             if (Vector3.Distance(player.transform.position, currentPosition) < 5)
             {
                 moveAmount = new Vector3(player.transform.position.x - currentPosition.x,
@@ -138,12 +140,14 @@ public class Child : MonoBehaviour
         previousPosition = currentPosition;
 
         //actually moving the object
-        moveAmount = moveAmount.normalized * Time.deltaTime * speed;
-        rigidBody.MovePosition(currentPosition + moveAmount);
+        moveAmount = moveAmount.normalized  * speed;
+    }
 
+    private void FixedUpdate()
+    {
         //updating where the object is located
-        currentPosition = transform.position;
-
+        currentPosition += moveAmount * Time.deltaTime;
+        rigidBody.MovePosition(currentPosition);
     }
 
     // Checks if bodies are colliding and removes if true

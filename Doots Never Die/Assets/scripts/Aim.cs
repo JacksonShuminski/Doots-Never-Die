@@ -17,6 +17,7 @@ public class Aim : MonoBehaviour
     private GameObject bugleEndTransform;
     private bool scaleSwitch = false;
     private GameState gamestate;
+    private int lastDoot;
 
     /*
     public event EventHandler<OnShootEventArgs> OnShoot;
@@ -33,6 +34,7 @@ public class Aim : MonoBehaviour
         aimTransform = GameObject.Find("Aim");
         bugleEndTransform = GameObject.Find("BugleEndPosition");
         cooldown_acc = 0;
+        lastDoot = 0;
     }
 
     // Update is called once per frame
@@ -87,6 +89,16 @@ public class Aim : MonoBehaviour
 
                 projectileList.Add(shot);
                 cooldown_acc = 0;
+
+                if (lastDoot == 0)
+                {
+                    lastDoot = 1;
+                }
+                else
+                {
+                    lastDoot = 0;
+                }
+                GetComponents<AudioSource>()[lastDoot].Play();
             }
         }
         else

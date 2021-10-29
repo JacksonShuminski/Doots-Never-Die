@@ -76,19 +76,6 @@ public class Player : MonoBehaviour
             }
 
             moveAmount = moveAmount.normalized * speed;
-            rigidbody.MovePosition(currentPosition + moveAmount * Time.deltaTime);
-
-            // have the rotation of the skeleton wobble like he's walking
-            if (moveAmount.magnitude > 0)
-            {
-                wobble += Time.deltaTime;
-                transform.rotation = Quaternion.Euler(new Vector3(0, 0, Mathf.Sin(wobble * 35) * 7));
-            }
-            else
-            {
-                transform.rotation = Quaternion.identity;
-                wobble = 0;
-            }
 
             // reverses the scale of the skeleton
             Vector3 newScale = transform.localScale;
@@ -112,6 +99,23 @@ public class Player : MonoBehaviour
                     gameState = GameState.Play;
                 }
             }
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        rigidbody.MovePosition(currentPosition + moveAmount * Time.deltaTime);
+
+        // have the rotation of the skeleton wobble like he's walking
+        if (moveAmount.magnitude > 0)
+        {
+            wobble += Time.deltaTime;
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, Mathf.Sin(wobble * 35) * 7));
+        }
+        else
+        {
+            transform.rotation = Quaternion.identity;
+            wobble = 0;
         }
     }
 

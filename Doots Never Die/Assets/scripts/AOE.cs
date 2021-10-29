@@ -28,8 +28,6 @@ public class AOE : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space) && timer == maxTime)
         {
             ActivateTrigger();
-
-            Debug.Log("AOE");
         }
         
         
@@ -55,5 +53,6 @@ public class AOE : MonoBehaviour
         Destroy(scream, 1);
         scream.transform.parent = transform;
         startTimer = true;
+        GetComponents<AudioSource>()[2].Play();
     }
 }
