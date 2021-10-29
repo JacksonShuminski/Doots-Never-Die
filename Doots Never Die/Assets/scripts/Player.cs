@@ -24,9 +24,7 @@ public class Player : MonoBehaviour
     //Timer/HP
     public float maxTime;
     public float timer; //Isn't going to be set in editor
-
-    //Score
-    public int score;
+    public static float finalTimer = 0;
 
     public GameState GetState
     {
@@ -54,6 +52,7 @@ public class Player : MonoBehaviour
             if (timer > 0)
             {
                 timer -= Time.deltaTime; //Deceases the timer
+                finalTimer += Time.deltaTime;
             }
 
             if (timer > maxTime * 1.2f)
@@ -61,8 +60,9 @@ public class Player : MonoBehaviour
                 timer = maxTime * 1.2f;
             }
 
-                if (timer <= 0)
+            if (timer <= 0)
             {
+                PlayerPrefs.SetFloat("score", finalTimer);
                 SceneManager.LoadScene("GameEnd");
                 gameState = GameState.End;
             }
